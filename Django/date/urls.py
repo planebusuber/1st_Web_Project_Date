@@ -9,4 +9,5 @@ urlpatterns = [
     path("place/cafe/",views.PlaceCafe.as_view(),name = "place_cafe"),
     path("place/rest/",views.PlaceRest.as_view(),name = "place_rest"),
     path("place/place/",views.PlacePlace.as_view(),name = "place_place"),
+    path("write/", views.ReviewCreate.as_view(), name="review_write")
 ]

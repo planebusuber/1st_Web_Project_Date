@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView
+from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.views.generic import ListView, CreateView
 from django.db import models
 from date.models import Cafe, Rest, Place, Review,Addr
-# Create your views here.
+from .forms import ReviewWrite
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import random
 
 class MainPage(ListView):
@@ -162,3 +163,48 @@ class PlacePlace(ListView):
         place_list = Place.objects.all()
 
         return place_list
+
+class ReviewCreate(CreateView):
+    model = Review
+    form_class = ReviewWrite
+    template_name = "date/review_form.html"
+
+    # def form_valid(self, form):
+    #     current_user = self.request.user
+    #     if current_user.is_authenticated:
+    #         form.instance.author = current_user
+    #
+    #         # 태그와 관련된 작업을 하기 전에 form_valid() 결과값을 response에 저장
+    #         response = super().form_valid(form)
+    #
+    #         return response
+    #
+    #     else:
+    #         return redirect("/")
+    #
+    #     # 권한이 있는지 체크하는 함수
+    # def test_func(self):
+    #     current_user = self.request.user
+    #     return current_user.is_authenticated
+    def get_success_url(self):
+        return reverse('review_list')
+
+def ReviewUpdate(request, pk):
+    # 이전 글의 데이터를 받아 옴
+    post = get_object_or_404(Review, pk=pk)
+
+    # 글을 수정하기 위해 페이지에 접속 후 제출을 눌렀을 때, POST 방식을 사용한다는 전제를 두고 있기 때문에
+    # form = ReviewWrite(request.POST, instance = post)로 활용
+    if request.method == "POST":
+        form = ReviewWrite(request.POST, instance = post)
+
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.save()
+            return redirect('review_list', pk = review.pk)
+
+    # 글을 수정하기 위해 페이지에 처음 접속했을 때(url로 get방식을 활용하기 때문에,
+    # form = PhotoForm(instance = post)에 request.POST를 집어넣을 필요가 없음
+    else:
+        form = ReviewWrite(instance = post)
+        return render(request, 'date/review_update.html', {"form" : form})
