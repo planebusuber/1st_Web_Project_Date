@@ -1,0 +1,20 @@
+{% extends "date/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% include "django/forms/widgets/input.html" %}
+
+{% block head_title %}Create Review{% endblock %}
+
+{% block main_area %}
+    <h1>Create New Review</h1>
+    <hr/>
+    <form method = "post" enctype="multipart/form-data">{% csrf_token %}
+        {{ form | crispy}}
+
+        <button type = "submit" class = "btn float-end text-white" style= "background-color:#FC4C64;">Submit</button>
+    </form>
+    {{ form.media }}
+    <div id="star_{{ widget.attrs.id }}" class="rateit" data-rateit-backingfld="#{{ widget.attrs.id }}"></div>
+    <input type="rating" name="score" value="4" required="" id="id_score" min="0" max="5" step="1" style="display: none;">
+{% endblock %}

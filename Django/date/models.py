@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class AuthGroup(models.Model):
@@ -188,8 +189,12 @@ class Rest(models.Model):
 class Review(models.Model): # Review 작성 모델
     title = models.CharField(max_length=50)
     content = models.TextField() # 글내용, 길이 제한이 없는 문자열
-    head_image = models.ImageField(upload_to="#", blank=True) #  이미지 삽입
     created_at = models.DateTimeField(auto_now_add=True) # 작성일, 날짜 + 시간
+    score = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    cafe_num = models.IntegerField(default=0)
+    rest_num = models.IntegerField(default=0)
+    place_num = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

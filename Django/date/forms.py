@@ -1,7 +1,11 @@
-from .models import Comment
+from .models import Comment, Review
 from django import forms
+
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+
+from .widgets import starWidget
+
 
 class CommentForm(forms.ModelForm):
     # 폼 이름은 CommentForm
@@ -20,4 +24,14 @@ class UserForm(UserCreationForm):
         model = User
         fields = ("username", "password1", "password2", "email")
 
-
+# Review 작성 폼
+class ReviewWrite(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = [ "title",
+                   "content",
+                   "score"
+                   ]
+        widgets = {
+            'score': starWidget,
+        }
