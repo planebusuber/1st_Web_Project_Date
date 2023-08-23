@@ -14,5 +14,5 @@ media
 Django/.idea/
 Django/date/static/date/imgs/
 Django/date/migrations/
-
+Django/users/migrations/
 
