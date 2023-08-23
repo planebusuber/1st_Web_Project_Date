@@ -18,20 +18,6 @@
 
 {% include "date/navbar.html" %}
 
-<!-- Search widget-->
-    <div class="card mb-4">
-            <div class="card-body">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="어디로 갈까요 ?"
-                           aria-label="Enter search term..." aria-describedby="button-search"
-                           id="search-input" />
-                    <button class="btn btn-primary" style= "background-color:#FC4C64;" id="button-search" type="button" onclick="searchPost()">
-                        놀러가기
-                    </button>
-            </div>
-        </div>
-    </div>
-
   <div class="container my-3">
         <div class="container" id = "main-area">
             {% block main_area %}
