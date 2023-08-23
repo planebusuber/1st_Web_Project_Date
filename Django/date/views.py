@@ -1,8 +1,11 @@
 from django.contrib.auth.models import User
+from django.contrib import auth
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
 from django.db import models
 from date.models import Cafe, Rest, Place, Review,Addr
+from date.forms import UserForm
+from django.contrib.auth import authenticate, login
 # Create your views here.
 import random
 
@@ -162,3 +165,5 @@ class PlacePlace(ListView):
         place_list = Place.objects.all()
 
         return place_list
+
+

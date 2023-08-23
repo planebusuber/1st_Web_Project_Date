@@ -32,15 +32,16 @@
                           {{ user.username }}
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/accounts/logout/">Log Out</a></li>
+                        <li><a class="dropdown-item" href="{% url 'users:logout' %}"> log out</a>
                       </ul>
                   </li>
              {% else %}
                   <li class="nav-item">
-                      <a class="nav-link text-white" href="#" data-bs-toggle = "modal" data-bs-target = "#loginModal">Log In</a>
+                      <a class="nav-link text-white" href="{% url 'users:login' %}">로그인</a>
                   </li>
              {% endif %}
             </ul>
+
         </div>
       </div>
     </div>
@@ -72,7 +73,7 @@
 
                     <input type="submit" class="btn btn-secondary" id="btn-login" value="로그인">
 
-                    <input type="button" class="btn btn-secondary" value="회원가입" onclick="location.href='/member/join'">
+                    <input type="button" class="btn btn-secondary" value="회원가입" onclick="location.href='/singup/'">
 
                 </div>
                  <br>

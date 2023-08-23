@@ -3,18 +3,16 @@
 
 {% block main_area %}
 
-{% if user.is_authenticated %}
-    {% if user.is_superuser or user.is_staff %}
+<!--{% if user.is_authenticated %}-->
+<!--    {% if user.is_superuser or user %}-->
 
-        <a class="btn btn btn-sm text-white" style="background-color: #FC4C64;" href="/date/post_review/" role="button">
-            <i class="fa-solid fa-pen-to-square" ></i>  글 쓰기
-        </a>
-    {% endif %}
-{% endif %}
+<!--        <a class="btn btn btn-sm text-white" style="background-color: #FC4C64;" href="/date/post_review/" role="button">-->
+<!--            <i class="fa-solid fa-pen-to-square" ></i>  글 쓰기-->
+<!--        </a>-->
+<!--    {% endif %}-->
+<!--{% endif %}글쓰기 코드 -->
 
 <h1>
-    <a href="/blog/"> <img src="http://127.0.0.1:8000/media/blog/images/23/07/18/%EB%A1%9C%EA%B3%A0.jpg">
-    </a>
     {% if category %}
         <span class = "badge bg-secondary">{{ category }}</span>
     {% endif %}

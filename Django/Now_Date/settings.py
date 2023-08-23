@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "date",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -127,6 +128,12 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Login 성공시 URL 경로
+LOGIN_REDIRECT_URL = "/"
+
+# Logout 성공시 URL 경로
+LOGOUT_REDIRECT_URL = "/"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "_media")
