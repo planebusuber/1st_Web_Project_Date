@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.db import models
 from date.models import Cafe, Rest, Place, Review,Addr
 from date.forms import UserForm
@@ -124,6 +124,11 @@ class PlaceList(ListView):
     models = Cafe
     template_name = "date/place.html"
 
+    def get_context_data(self, **kwargs):
+        context =super().get_context_data()
+        context["addr_names"] = Addr.objects.all()
+
+        return context
     def get_queryset(self):
         cafe_list = Cafe.objects.all()
 
@@ -148,6 +153,14 @@ class PlaceCafe(ListView):
 
         return cafe_list
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["addr_names"] = Addr.objects.all()
+        context["crp_check"] = 1
+        context["check"] = 1
+
+        return context
+
 class PlaceRest(ListView):
     models = Rest
     template_name = "date/place.html"
@@ -156,6 +169,13 @@ class PlaceRest(ListView):
         rest_list = Rest.objects.all()
 
         return rest_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["addr_names"] = Addr.objects.all()
+        context["crp_check"] = 1
+        context["check"] = 2
+        return context
 
 class PlacePlace(ListView):
     models = Place
@@ -166,4 +186,150 @@ class PlacePlace(ListView):
 
         return place_list
 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["addr_names"] = Addr.objects.all()
+        context["crp_check"] = 1
+        context["check"] = 3
+
+        return context
+
+class PlaceCafeLoc(ListView):
+    models = Cafe
+    template_name = "date/place.html"
+
+    def get_queryset(self):
+        q = self.kwargs["q"]
+
+        cafe_list_loc = Cafe.objects.filter(cafe_addr__contains=q)
+
+        return cafe_list_loc
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["addr_names"] = Addr.objects.all()
+        context["crp_check"] = 1
+        context["check"] = 1
+
+        return context
+
+
+class PlaceRestLoc(ListView):
+    models = Rest
+    template_name = "date/place.html"
+
+    def get_queryset(self):
+        q = self.kwargs["q"]
+
+        rest_list_loc = Rest.objects.filter(rest_addr__contains=q)
+
+        return rest_list_loc
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["addr_names"] = Addr.objects.all()
+        context["crp_check"] = 1
+        context["check"] = 2
+
+        return context
+
+
+class PlacePlaceLoc(ListView):
+    models = Place
+    template_name = "date/place.html"
+
+    def get_queryset(self):
+        q = self.kwargs["q"]
+
+        place_list_loc = Place.objects.filter(place_addr__contains=q)
+
+        return place_list_loc
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["addr_names"] = Addr.objects.all()
+        context["crp_check"] = 1
+        context["check"] = 3
+        return context
+
+class CafeDetail(ListView):
+    models = Cafe
+    template_name = "date/place_detail.html"
+
+    def get_queryset(self):
+        q = self.kwargs["q"]
+
+        cafe_list = Cafe.objects.filter(cafe_name__contains=q)
+
+        return cafe_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        q = self.kwargs["q"]
+
+        context["cafe_detail_list"] = Cafe.objects.get(cafe_name=q)
+        context["check"] = 1
+
+        return context
+class RestDetail(ListView):
+    models = Rest
+    template_name = "date/place_detail.html"
+    def get_queryset(self):
+        q = self.kwargs["q"]
+
+        rest_list = Rest.objects.filter(rest_name__contains=q)
+
+        return rest_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+
+        q = (self.kwargs["q"])
+
+        context["rest_detail_list"] = Rest.objects.get(rest_name=q)
+        context["check"] = 2
+
+        return context
+class PlaceDetail(ListView):
+    models = Place
+    template_name = "date/place_detail.html"
+    def get_queryset(self):
+        q = self.kwargs["q"]
+
+        place_list = Place.objects.filter(place_name__contains=q)
+
+        return place_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+
+        q = (self.kwargs["q"])
+
+        context["place_detail_list"] = Place.objects.get(place_name=q)
+        context["check"] = 3
+
+        return context
+
+class CosPage(ListView):
+    models = Cafe
+    template_name = "date/cos.html"
+    def get_queryset(self):
+
+       list = Cafe.objects.all()
+
+       return list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+
+        q1 = (self.kwargs["q1"])
+        q2 = (self.kwargs["q2"])
+        q3 = (self.kwargs["q3"])
+
+        context["cafe_detail_list"] = Cafe.objects.get(cafe_num=q1)
+        context["rest_detail_list"] = Rest.objects.get(rest_num=q2)
+        context["place_detail_list"] = Place.objects.get(place_num=q3)
+        print(q1)
+        return context
 
