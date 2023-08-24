@@ -5,9 +5,10 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic import ListView, CreateView, DetailView
 from django.db import models
 from date.models import Cafe, Rest, Place, Review, Addr
-from .forms import ReviewWrite
+from .forms import ReviewWrite,Star
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import random
+from django.core.exceptions import PermissionDenied #권한 없는 유저 거르기
 
 class MainPage(ListView):
     model = Cafe
@@ -44,6 +45,8 @@ class MainPage(ListView):
         place_ran = random.randint(0, place_max-1)
         context["place_recommed_3"] = Place.objects.all()[place_ran]
 
+        context["review_top"] = Review.objects.all().order_by('-score')[:3]
+
         return context
 
 
@@ -52,11 +55,6 @@ class ReviewList(ListView):
     paginate_by = 5
     ordering = ['-created_at'] # 게시글 최신순 정렬
     template_name = "date/review_list.html"
-
-
-    author = models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
-                                  # on_delete = models.CASCADE : 게시글의 작성자가 삭제되었을때 같이 삭제한다
-
 
 def form_valid(self, form):
     current_user = self.request.user
@@ -117,6 +115,7 @@ class SelectPage(ListView):
         context["place_recommed_2"] = Place.objects.filter(place_addr__contains=q)[place_ran]
         place_ran = random.randint(0, place_max-1)
         context["place_recommed_3"] = Place.objects.filter(place_addr__contains=q)[place_ran]
+
 
         return context
 
@@ -413,3 +412,12 @@ class MyReview(ListView):
         context["review_list"] = Review.objects.filter(author=current_user)
         return context
 
+def ReviewDelete(request, pk):
+    review = get_object_or_404(Review, pk=pk)
+
+    if request.user.is_authenticated and request.user == review.author:
+        # 조건을 만족하면 댓글을 삭제하고 댓글이 달려있던 게시글의 상세페이지로 리다이렉트
+        review.delete()
+        return redirect("/myreview/")
+    else:
+        PermissionDenied

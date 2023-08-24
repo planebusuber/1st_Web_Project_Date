@@ -1,5 +1,6 @@
 {% extends "date/base.html" %}
-
+{% load crispy_forms_tags %}
+{% include "django/forms/widgets/input.html" %}
 {% block main_area %}
 <div class="container">
 
@@ -24,13 +25,13 @@
                             <div class="row h-100 w-100 align-items-center">
                                 <div class="col">
                                 <a href="/cafedetail/{{cafe_recommed_1.cafe_name}}/" style="text-decoration: none;color: black"><p>{{cafe_recommed_1.cafe_name}}</p></a>
-                                <img src="/static/date/imgs/cafe_img/{{cafe_recommed_1.cafe_img}}.jpg" alt="{{cafe_recommed_1.cafe_img}}"width="150">
+                                <img src="/static/date/imgs/cafe_img/{{cafe_recommed_1.cafe_img}}.jpg" alt="{{cafe_recommed_1.cafe_img}}"width="150" height="150">
                                 <br/><br/>
                                 <a href="/restdetail/{{rest_recommed_1.rest_name}}/" style="text-decoration: none;color: black"><p>{{rest_recommed_1.rest_name}}</p></a>
-                                <img src="/static/date/imgs/rest_img/{{rest_recommed_1.rest_img}}.jpg" alt="{{rest_recommed_1.rest_img}}"width="150">
+                                <img src="/static/date/imgs/rest_img/{{rest_recommed_1.rest_img}}.jpg" alt="{{rest_recommed_1.rest_img}}"width="150" height="150">
                                 <br/><br/>
                                 <a href="/placedetail/{{place_recommed_1.place_name}}/" style="text-decoration: none;color: black"><p>{{place_recommed_1.place_name}}</p></a>
-                                <img src="/static/date/imgs/place_img/{{place_recommed_1.place_img}}.jpg" alt="{{place_recommed_1.place_img}}"width="150">
+                                <img src="/static/date/imgs/place_img/{{place_recommed_1.place_img}}.jpg" alt="{{place_recommed_1.place_img}}"width="150" height="150">
                                 <br/><br/>
                                 </div>
                             </div>
@@ -50,13 +51,13 @@
                             <div class="row h-100 w-100 align-items-center">
                                <div class="col">
                                     <a href="/cafedetail/{{cafe_recommed_2.cafe_name}}/" style="text-decoration: none;color: black"><p>{{cafe_recommed_2.cafe_name}}</p></a>
-                                    <img src="/static/date/imgs/cafe_img/{{cafe_recommed_2.cafe_img}}.jpg" alt="{{cafe_recommed_2.cafe_img}}"width="150">
+                                    <img src="/static/date/imgs/cafe_img/{{cafe_recommed_2.cafe_img}}.jpg" alt="{{cafe_recommed_2.cafe_img}}"width="150" height="150">
                                     <br/><br/>
                                     <a href="/restdetail/{{rest_recommed_2.rest_name}}/" style="text-decoration: none;color: black"><p>{{rest_recommed_2.rest_name}}</p></a>
-                                    <img src="/static/date/imgs/rest_img/{{rest_recommed_2.rest_img}}.jpg" alt="{{rest_recommed_2.rest_img}}"width="150">
+                                    <img src="/static/date/imgs/rest_img/{{rest_recommed_2.rest_img}}.jpg" alt="{{rest_recommed_2.rest_img}}"width="150" height="150">
                                     <br/><br/>
                                     <a href="/placedetail/{{place_recommed_2.place_name}}/" style="text-decoration: none;color: black"><p>{{place_recommed_2.place_name}}</p></a>
-                                    <img src="/static/date/imgs/place_img/{{place_recommed_2.place_img}}.jpg" alt="{{place_recommed_2.place_img}}"width="150">
+                                    <img src="/static/date/imgs/place_img/{{place_recommed_2.place_img}}.jpg" alt="{{place_recommed_2.place_img}}"width="150" height="150">
                                     <br/><br/>
                                 </div>
                             </div>
@@ -75,13 +76,13 @@
                             <div class="row h-100 w-100 align-items-center">
                                 <div class="col">
                                     <a href="/cafedetail/{{cafe_recommed_3.cafe_name}}/" style="text-decoration: none;color: black"><p>{{cafe_recommed_3.cafe_name}}</p></a>
-                                    <img src="/static/date/imgs/cafe_img/{{cafe_recommed_3.cafe_img}}.jpg" alt="{{cafe_recommed_3.cafe_img}}"width="150">
+                                    <img src="/static/date/imgs/cafe_img/{{cafe_recommed_3.cafe_img}}.jpg" alt="{{cafe_recommed_3.cafe_img}}"width="150" height="150">
                                     <br/><br/>
                                     <a href="/restdetail/{{rest_recommed_3.rest_name}}/" style="text-decoration: none;color: black"><p>{{rest_recommed_3.rest_name}}</p></a>
-                                    <img src="/static/date/imgs/rest_img/{{rest_recommed_3.rest_img}}.jpg" alt="{{rest_recommed_3.rest_img}}"width="150">
+                                    <img src="/static/date/imgs/rest_img/{{rest_recommed_3.rest_img}}.jpg" alt="{{rest_recommed_3.rest_img}}"width="150" height="150">
                                     <br/><br/>
                                     <a href="/placedetail/{{place_recommed_3.place_name}}/" style="text-decoration: none;color: black"><p>{{place_recommed_3.place_name}}</p></a>
-                                    <img src="/static/date/imgs/place_img/{{place_recommed_3.place_img}}.jpg" alt="{{place_recommed_3.place_img}}"width="150">
+                                    <img src="/static/date/imgs/place_img/{{place_recommed_3.place_img}}.jpg" alt="{{place_recommed_3.place_img}}"width="150" height="150">
                                     <br/><br/>
                                 </div>
                             </div>
@@ -110,38 +111,22 @@
     <div class="row text-center" id = "review">
         <div class="col-lg-12" id = "Most_like">
             <div class="row d-flex justify-content-end">
-                <div class="col-lg-4" id="like1">
+                {%for review in review_top %}
+                <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
-                            <h3>추천1위</h3>
+                            <h3>{{review.title}}</h3>
                         </div>
                         <div class="card-body">
-                            <p>123</p>
+                            <p>{{review.author}}</p>
+                            <p>{{review.content}}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn text-white" style="background-color: #FC4C64;" href="/review/{{review.pk}}/">상세 보기</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-4" id="like2">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>추천2위</h3>
-                        </div>
-                        <div class="card-body">
-                            <p>123</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4" id="like3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>추천3위</h3>
-                        </div>
-                        <div class="card-body">
-                            <p>123</p>
-                        </div>
-                    </div>
-                </div>
+                {%endfor%}
             </div>
         </div>
     </div>
