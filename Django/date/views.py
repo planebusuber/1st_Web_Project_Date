@@ -345,20 +345,23 @@ class ReviewCreate(CreateView):
     form_class = ReviewWrite
     template_name = "date/review_form.html"
 
-    # def form_valid(self, form):
-    #     current_user = self.request.user
-    #     if current_user.is_authenticated:
-    #         form.instance.author = current_user
-    #
-    #         # 태그와 관련된 작업을 하기 전에 form_valid() 결과값을 response에 저장
-    #         response = super().form_valid(form)
-    #
-    #         return response
-    #
-    #     else:
-    #         return redirect("/")
-    #
-    #     # 권한이 있는지 체크하는 함수
+    def form_valid(self, form):
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            form.instance.author = current_user
+            form.instance.cafe_num = (self.kwargs["q1"])
+            form.instance.rest_num = (self.kwargs["q2"])
+            form.instance.place_num = (self.kwargs["q3"])
+
+            # 태그와 관련된 작업을 하기 전에 form_valid() 결과값을 response에 저장
+            response = super().form_valid(form)
+
+            return response
+
+        else:
+            return redirect("/")
+
+        # 권한이 있는지 체크하는 함수
     # def test_func(self):
     #     current_user = self.request.user
     #     return current_user.is_authenticated

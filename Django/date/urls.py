@@ -20,7 +20,7 @@ urlpatterns = [
     path("cafedetail/<str:q>/",views.CafeDetail.as_view(), name = "cafe_detail"),
     path("restdetail/<str:q>/",views.RestDetail.as_view(), name = "rest_detail"),
     path("placedetail/<str:q>/",views.PlaceDetail.as_view(), name = "place_detail"),
-    path("cos/<int:q1>/<int:q2>/<int:q3>", views.CosPage.as_view(), name="cos_page"),
-    path("write/", views.ReviewCreate.as_view(), name="review_write")
+    path("cos/<int:q1>/<int:q2>/<int:q3>/", views.CosPage.as_view(), name="cos_page"),
+    path("write/<int:q1>/<int:q2>/<int:q3>/", views.ReviewCreate.as_view(), name="review_write")
 
 ]
