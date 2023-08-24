@@ -35,6 +35,11 @@
                         <li><a class="dropdown-item" href="{% url 'users:logout' %}"> 로그아웃</a></li>
                         <li><a class="dropdown-item" href="#"> 내 작성 글</a></li>
                       </ul>
+                        <li><a class="dropdown-item" href="/myreview/"> 내 리뷰보기</a>
+                        <li><a class="dropdown-item" href="{% url 'users:logout' %}"> log out</a>
+                      </ul>
+
+                  </li>
              {% else %}
                   <li class="nav-item">
                       <a class="nav-link text-white" href="{% url 'users:login' %}">로그인</a>
