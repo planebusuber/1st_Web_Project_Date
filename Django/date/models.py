@@ -190,14 +190,14 @@ class Review(models.Model): # Review 작성 모델
     title = models.CharField(max_length=50)
     content = models.TextField() # 글내용, 길이 제한이 없는 문자열
     created_at = models.DateTimeField(auto_now_add=True) # 작성일, 날짜 + 시간
-    score = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    score = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default = 0)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     cafe_num = models.IntegerField(default=0)
     rest_num = models.IntegerField(default=0)
     place_num = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class Comment(models.Model): # 댓글 기능 모델
@@ -206,4 +206,3 @@ class Comment(models.Model): # 댓글 기능 모델
     content = models.TextField() # 게시글
     created_at = models.DateTimeField(auto_now_add=True) # 작성일자
     modified_at =models.DateTimeField(auto_now=True) # 수정일자
-

@@ -1,0 +1,83 @@
+{% extends "date/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}
+{{ review.title }} - Date
+{% endblock %}
+
+{% block main_area %}
+<div id="post-area">
+    <!-- Post content-->
+    <article>
+        <!-- Post header-->
+        <header class="mb-4">
+            <div class="row">
+                <div class="col-lg-9">
+                    <!-- Post title-->
+                    <h1 class="fw-bolder mb-1" style="font-family: 'Gowun Dodum', sans-serif;">{{ review.title }}</h1>
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2">Posted on {{ review.created_at }} by {{ review.author | upper }}</div>
+                </div>
+                <div class="col-lg-3">
+                    <!-- 글 수정 버튼 작성-->
+                    {% if user.is_authenticated and user == review.author %}
+                        <a class = "btn float-end text-white" style= "background-color:#FC4C64;" href = "{% url 'review_update' pk=review.pk %}" role = "button">
+                            <i class="fa-solid fa-feather"></i>  Edit Review
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- 평가한 별점이 보이는 구역 -->
+            <section class="mb-5">
+                {{ form.media }}
+                <div id="star_{{ widget.attrs.id }}" class="rateit" data-rateit-backingfld="#{{ widget.attrs.id }}"></div>
+                <input type="rating" name="score" value="4" required="" id="id_score" min="0" max="5" step="1" style="display: none;">
+                {{ review.score }}
+            </section>
+        </header>
+        <!-- Preview image figure-->
+        <div class="row">
+            <!-- cafe_image -->
+            <div class="col">
+                <figure class="mb-4"><img class="img-fluid rounded" src="/static/date/imgs/cafe_img/{{cafe_detail_list.cafe_img}}.jpg" alt="{{cafe_detail_list.cafe_img}}" /></figure>
+            </div>
+            <!-- rest_image -->
+            <div class="col">
+                <figure class="mb-4"><img class="img-fluid rounded" src="/static/date/imgs/rest_img/{{rest_detail_list.rest_img}}.jpg" alt="{{rest_detail_list.rest_img}}" /></figure>
+            </div>
+            <!-- place_image -->
+            <div class="col">
+                <figure class="mb-4"><img class="img-fluid rounded" src="/static/date/imgs/place_img/{{place_detail_list.place_img}}.jpg" alt="{{place_detail_list.place_img}}" /></figure>
+            </div>
+        </div>
+        <!-- Preview title -->
+        <div class="row">
+            <!-- cafe_title -->
+            <div class="col">
+                <section class="mb-5">
+                    <p class="fs-5 mb-4" style="font-family: 'Gowun Dodum', sans-serif;">{{ cafe_detail_list.cafe_name }}</p>
+                </section>
+            </div>
+            <!-- rest_title -->
+            <div class="col">
+                <section class="mb-5">
+                    <p class="fs-5 mb-4" style="font-family: 'Gowun Dodum', sans-serif;">{{ rest_detail_list.rest_name }}</p>
+                </section>
+            </div>
+            <!-- place_title -->
+            <div class="col">
+                <section class="mb-5">
+                    <p class="fs-5 mb-4" style="font-family: 'Gowun Dodum', sans-serif;">{{ place_detail_list.place_name }}</p>
+                </section>
+            </div>
+        </div>
+        <!-- review_content -->
+        <div class="col">
+            <section class="mb-5" style="font-family: 'Gowun Dodum', sans-serif;">
+                <p class="fs-5 mb-4">{{ review.content | linebreaks }}</p>
+            </section>
+        </div>
+
+    </article>
+</div>
+{% endblock %}
