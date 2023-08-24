@@ -53,8 +53,16 @@
 
         </div>
         <div>
-            <a class="btn btn-primary float-end" href="/write/{{cafe_detail_list.cafe_num}}/{{rest_detail_list.rest_num}}/{{place_detail_list.place_num}}/" role="button">리뷰작성</a>
-
+<!--            <a class="btn btn-primary float-end" href="/write/{{cafe_detail_list.cafe_num}}/{{rest_detail_list.rest_num}}/{{place_detail_list.place_num}}/" role="button">리뷰작성</a>-->
+            {% if user.is_authenticated %}
+                {% if user.is_superuser or user %}
+                    <a class="btn btn btn-sm text-white float-end" style="background-color: #FC4C64;"
+                       href="/write/{{cafe_detail_list.cafe_num}}/{{rest_detail_list.rest_num}}/{{place_detail_list.place_num}}/"
+                       role="button">
+                            <i class="fa-solid fa-pen-to-square" ></i>  리뷰 작성
+                    </a>
+                {% endif %}
+            {% endif %}
         </div>
     </div>
         <br/>

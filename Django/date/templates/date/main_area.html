@@ -6,7 +6,7 @@
     <div class="row">
         {% for i in addr_names %}
         <div class="col">
-            <span class="badge badge-pill badge-primary"><a style="text-decoration: none;" href="/main_area/{{i.addr_name}}/">{{i.addr_name}}</a></span>
+            <span class="badge badge-pill badge-primary"><a style="text-decoration: none; color: black" href="/main_area/{{i.addr_name}}/">{{i.addr_name}}</a></span>
         </div>
         {%endfor%}
     </div>
@@ -22,16 +22,16 @@
                             <h3>추천1</h3>
                         </div>
                         <div class="card-body">
-                            <a href="/cafedetail/{{cafe_recommed_1.cafe_name}}/" style="text-decoration: none;"><p>{{cafe_recommed_1.cafe_name}}</p></a>
+                            <a href="/cafedetail/{{cafe_recommed_1.cafe_name}}/" style="text-decoration: none; color: black"><p>{{cafe_recommed_1.cafe_name}}</p></a>
                             <img src="/static/date/imgs/cafe_img/{{cafe_recommed_1.cafe_img}}.jpg" alt="{{cafe_recommed_1.cafe_img}}"width="150">
                             <br/><br/>
-                            <a href="/restdetail/{{rest_recommed_1.rest_name}}/" style="text-decoration: none;"><p>{{rest_recommed_1.rest_name}}</p></a>
+                            <a href="/restdetail/{{rest_recommed_1.rest_name}}/" style="text-decoration: none; color: black"><p>{{rest_recommed_1.rest_name}}</p></a>
                             <img src="/static/date/imgs/rest_img/{{rest_recommed_1.rest_img}}.jpg" alt="{{rest_recommed_1.rest_img}}"width="150">
                             <br/><br/>
-                            <a href="/placedetail/{{place_recommed_1.place_name}}/" style="text-decoration: none;"><p>{{place_recommed_1.place_name}}</p></a>
+                            <a href="/placedetail/{{place_recommed_1.place_name}}/" style="text-decoration: none; color: black"><p>{{place_recommed_1.place_name}}</p></a>
                             <img src="/static/date/imgs/place_img/{{place_recommed_1.place_img}}.jpg" alt="{{place_recommed_1.place_img}}"width="150">
                             <br/><br/>
-                            <a type="button" class="btn btn-primary" href="/cos/{{cafe_recommed_1.cafe_num}}/{{rest_recommed_1.rest_num}}/{{place_recommed_1.place_num}}/">상세보기</a>
+                            <a type="button" class="btn text-white" style="background-color: #FC4C64;" href="/cos/{{cafe_recommed_1.cafe_num}}/{{rest_recommed_1.rest_num}}/{{place_recommed_1.place_num}}/">상세보기</a>
                         </div>
                     </div>
                 </div>
@@ -42,16 +42,16 @@
                             <h3>추천2</h3>
                         </div>
                         <div class="card-body">
-                            <a href="/cafedetail/{{cafe_recommed_2.cafe_name}}/" style="text-decoration: none;"><p>{{cafe_recommed_2.cafe_name}}</p></a>
+                            <a href="/cafedetail/{{cafe_recommed_2.cafe_name}}/" style="text-decoration: none; color: black"><p>{{cafe_recommed_2.cafe_name}}</p></a>
                             <img src="/static/date/imgs/cafe_img/{{cafe_recommed_2.cafe_img}}.jpg" alt="{{cafe_recommed_2.cafe_img}}"width="150">
                             <br/><br/>
-                            <a href="/restdetail/{{rest_recommed_2.rest_name}}/" style="text-decoration: none;"><p>{{rest_recommed_2.rest_name}}</p></a>
+                            <a href="/restdetail/{{rest_recommed_2.rest_name}}/" style="text-decoration: none; color: black"><p>{{rest_recommed_2.rest_name}}</p></a>
                             <img src="/static/date/imgs/rest_img/{{rest_recommed_2.rest_img}}.jpg" alt="{{rest_recommed_2.rest_img}}"width="150">
                             <br/><br/>
-                            <a href="/placedetail/{{place_recommed_2.place_name}}/" style="text-decoration: none;"><p>{{place_recommed_2.place_name}}</p></a>
+                            <a href="/placedetail/{{place_recommed_2.place_name}}/" style="text-decoration: none; color: black"><p>{{place_recommed_2.place_name}}</p></a>
                             <img src="/static/date/imgs/place_img/{{place_recommed_2.place_img}}.jpg" alt="{{place_recommed_2.place_img}}"width="150">
                             <br/><br/>
-                            <a type="button" class="btn btn-primary" href="/cos/{{cafe_recommed_2.cafe_num}}/{{rest_recommed_2.rest_num}}/{{place_recommed_2.place_num}}/">상세보기</a>
+                            <a type="button" class="btn text-white" style="background-color: #FC4C64;" href="/cos/{{cafe_recommed_2.cafe_num}}/{{rest_recommed_2.rest_num}}/{{place_recommed_2.place_num}}/">상세보기</a>
                         </div>
                     </div>
                 </div>
@@ -62,16 +62,16 @@
                             <h3>추천3</h3>
                         </div>
                         <div class="card-body">
-                            <a href="/cafedetail/{{cafe_recommed_3.cafe_name}}/" style="text-decoration: none;"><p>{{cafe_recommed_3.cafe_name}}</p></a>
+                            <a href="/cafedetail/{{cafe_recommed_3.cafe_name}}/" style="text-decoration: none; color: black"><p>{{cafe_recommed_3.cafe_name}}</p></a>
                             <img src="/static/date/imgs/cafe_img/{{cafe_recommed_3.cafe_img}}.jpg" alt="{{cafe_recommed_3.cafe_img}}"width="150">
                             <br/><br/>
-                            <a href="/restdetail/{{rest_recommed_3.rest_name}}/" style="text-decoration: none;"><p>{{rest_recommed_3.rest_name}}</p></a>
+                            <a href="/restdetail/{{rest_recommed_3.rest_name}}/" style="text-decoration: none; color: black"><p>{{rest_recommed_3.rest_name}}</p></a>
                             <img src="/static/date/imgs/rest_img/{{rest_recommed_3.rest_img}}.jpg" alt="{{rest_recommed_3.rest_img}}"width="150">
                             <br/><br/>
-                            <a href="/placedetail/{{place_recommed_3.place_name}}/" style="text-decoration: none;"><p>{{place_recommed_3.place_name}}</p></a>
+                            <a href="/placedetail/{{place_recommed_3.place_name}}/" style="text-decoration: none; color: black"><p>{{place_recommed_3.place_name}}</p></a>
                             <img src="/static/date/imgs/place_img/{{place_recommed_3.place_img}}.jpg" alt="{{place_recommed_3.place_img}}"width="150">
                             <br/><br/>
-                            <a type="button" class="btn btn-primary" href="/cos/{{cafe_recommed_3.cafe_num}}/{{rest_recommed_3.rest_num}}/{{place_recommed_3.place_num}}/">상세보기</a>
+                            <a type="button" class="btn text-white" style="background-color: #FC4C64;" href="/cos/{{cafe_recommed_3.cafe_num}}/{{rest_recommed_3.rest_num}}/{{place_recommed_3.place_num}}/">상세보기</a>
                         </div>
                     </div>
                 </div>
@@ -130,7 +130,6 @@
         </div>
     </div>
 </div>
-
 <!-- 날씨 위젯 스크립트 -->
 <script async src="https://app2.weatherwidget.org/js/?id=ww_88067e04ea43f"></script>
 {% endblock %}

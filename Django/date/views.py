@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib import auth
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.db import models
@@ -57,6 +58,7 @@ class MainPage(ListView):
 class ReviewList(ListView):
     model = Review
     paginate_by = 5
+    ordering = ['-created_at'] # 게시글 최신순 정렬
     template_name = "date/review_list.html"
 
 
@@ -387,3 +389,6 @@ def ReviewUpdate(request, pk):
     else:
         form = ReviewWrite(instance = post)
         return render(request, 'date/review_update.html', {"form" : form})
+
+
+

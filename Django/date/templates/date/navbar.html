@@ -22,7 +22,7 @@
             <ul class="navbar-nav ms-auto">
              {% if user.is_authenticated %}
                   <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           {% if user.socialaccount_set.all.first.get_avatar_url %}
                             <img class="rounded-circle" width="25px" src="{{ user.socialaccount_set.all.first.get_avatar_url }}">
                           {% else %}
@@ -32,9 +32,9 @@
                           {{ user.username }}
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'users:logout' %}"> log out</a>
+                        <li><a class="dropdown-item" href="{% url 'users:logout' %}"> 로그아웃</a></li>
+                        <li><a class="dropdown-item" href="#"> 내 작성 글</a></li>
                       </ul>
-                  </li>
              {% else %}
                   <li class="nav-item">
                       <a class="nav-link text-white" href="{% url 'users:login' %}">로그인</a>

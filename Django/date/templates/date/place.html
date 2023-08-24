@@ -16,32 +16,16 @@
 </head>
 <body>
     {% include "date/navbar.html" %}
-    <!-- Search widget-->
-    <div class="card mb-4">
-            <div class="card-body">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="어디로 갈까요 ?"
-                           aria-label="Enter search term..." aria-describedby="button-search"
-                           id="search-input" />
-                    <button class="btn btn-primary" style= "background-color:#FC4C64;" id="button-search" type="button" onclick="searchPost()">
-                        놀러가기
-                    </button>
-            </div>
-        </div>
-    </div>
-
     <div class="row d-flex justify-content-center">
-
         <div class="col-2">
-            <span class="badge badge-pill badge-primary"><a style="text-decoration: none;" href="/place/cafe/">카페</a></span>
+            <span class="badge badge-pill badge-primary"><a style="text-decoration: none; color: black" href="/place/cafe/">카페</a></span>
         </div>
         <div class="col-2">
-            <span class="badge badge-pill badge-primary"><a style="text-decoration: none;" href="/place/rest/">식당</a></span>
+            <span class="badge badge-pill badge-primary"><a style="text-decoration: none; color: black" href="/place/rest/">식당</a></span>
         </div>
         <div class="col-2">
-            <span class="badge badge-pill badge-primary"><a style="text-decoration: none;" href="/place/place/">관광지</a></span>
+            <span class="badge badge-pill badge-primary"><a style="text-decoration: none; color: black" href="/place/place/">관광지</a></span>
         </div>
-
     </div>
     <br/>
     {% if crp_check == 1 %}
@@ -49,13 +33,13 @@
             {% for i in addr_names %}
             <div class="col">
                 {%if check == 1%}
-                    <span class="badge badge-pill badge-primary"><a style="text-decoration: none;" href="/place/cafe/{{i.addr_name}}/">{{i.addr_name}}</a></span>
+                    <span class="badge badge-pill badge-primary"><a style="text-decoration: none; color: black" href="/place/cafe/{{i.addr_name}}/">{{i.addr_name}}</a></span>
                 {%endif%}
                 {%if check == 2%}
-                    <span class="badge badge-pill badge-primary"><a style="text-decoration: none;" href="/place/rest/{{i.addr_name}}/">{{i.addr_name}}</a></span>
+                    <span class="badge badge-pill badge-primary"><a style="text-decoration: none; color: black" href="/place/rest/{{i.addr_name}}/">{{i.addr_name}}</a></span>
                 {%endif%}
                 {%if check == 3%}
-                    <span class="badge badge-pill badge-primary"><a style="text-decoration: none;" href="/place/place/{{i.addr_name}}/">{{i.addr_name}}</a></span>
+                    <span class="badge badge-pill badge-primary"><a style="text-decoration: none; color: black" href="/place/place/{{i.addr_name}}/">{{i.addr_name}}</a></span>
                 {%endif%}
             </div>
             {%endfor%}
@@ -68,7 +52,7 @@
             {%for cafe in cafe_list%}
                 <div class="card">
                     <div class="card-header">
-                        <a href="/cafedetail/{{cafe.cafe_name}}/" style="text-decoration: none;"> <h3>{{cafe.cafe_name}}</h3></a>
+                        <a href="/cafedetail/{{cafe.cafe_name}}/" style="text-decoration: none; color: black"> <h3>{{cafe.cafe_name}}</h3></a>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
@@ -87,7 +71,7 @@
             {%for rest in rest_list%}
                 <div class="card">
                     <div class="card-header">
-                        <a href="/restdetail/{{rest.rest_name}}" style="text-decoration: none;">  <h3>{{rest.rest_name}}</h3></a>
+                        <a href="/restdetail/{{rest.rest_name}}" style="text-decoration: none; color: black">  <h3>{{rest.rest_name}}</h3></a>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
@@ -105,7 +89,7 @@
             {%for place in place_list%}
                 <div class="card">
                     <div class="card-header">
-                        <a href="/placedetail/{{place.place_name}}/" style="text-decoration: none;"> <h3>{{place.place_name}}</h3></a>
+                        <a href="/placedetail/{{place.place_name}}/" style="text-decoration: none; color: black"> <h3>{{place.place_name}}</h3></a>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-center">

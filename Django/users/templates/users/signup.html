@@ -5,7 +5,7 @@
         {% csrf_token %}
         {% include 'users/form_errors.html' %}
         <div class="mb-3">
-            <label for="username">사용자 이름</label>
+            <label for="username">아이디</label>
             <input type="text" class="form-control" name="username" id="username"
                    value="{{ form.username.value|default_if_none:'' }}">
         </div>
@@ -24,7 +24,7 @@
             <input type="text" class="form-control" name="email" id="email"
                    value="{{ form.email.value|default_if_none:'' }}">
         </div>
-        <button type="submit" class="btn btn-primary">생성하기</button>
+        <button type="submit" class="btn btn-primary" style="background-color: #FC4C64;">생성하기</button>
     </form>
 </div>
 {% endblock %}
