@@ -376,6 +376,7 @@ class ReviewDetail(DetailView):
         context["cafe_detail_list"] = Cafe.objects.get(cafe_num=cafe)
         context["rest_detail_list"] = Rest.objects.get(rest_num=rest)
         context["place_detail_list"] = Place.objects.get(place_num=place)
+        context["form"] = Star(instance=review)
 
         return context
 

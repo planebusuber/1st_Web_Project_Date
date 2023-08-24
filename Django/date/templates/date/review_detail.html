@@ -1,6 +1,6 @@
 {% extends "date/base.html" %}
 {% load crispy_forms_tags %}
-
+{% include "django/forms/widgets/input.html" %}
 {% block head_title %}
 {{ review.title }} - Date
 {% endblock %}
@@ -29,10 +29,9 @@
             </div>
             <!-- 평가한 별점이 보이는 구역 -->
             <section class="mb-5">
+                {{ form | crispy}}
                 {{ form.media }}
-                <div id="star_{{ widget.attrs.id }}" class="rateit" data-rateit-backingfld="#{{ widget.attrs.id }}"></div>
-                <input type="rating" name="score" value="4" required="" id="id_score" min="0" max="5" step="1" style="display: none;">
-                {{ review.score }}
+
             </section>
         </header>
         <!-- Preview image figure-->
