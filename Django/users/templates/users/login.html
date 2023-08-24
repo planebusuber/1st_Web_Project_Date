@@ -4,27 +4,27 @@
 
 </br></br>
 <div class="container text-center d-flex justify-content-center" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-    <div class="card" style="width: 40rem;">
+    <div class="card" style="width: 40rem;"> <!-- 로그인 카드 생성-->
        <div class="card-header text-white" style="background-color:#FC4C60;">
         <h1>로그인</h1>
        </div>
     </br>
-        <form method="post" action="{% url 'users:login' %}">
-          {% csrf_token %}
-          {% include 'users/form_errors.html' %}
+        <form method="post" action="{% url 'users:login' %}"> <!-- POST 메소드로 데이터를 서버에 전송해주는 폼 생성. -->
+          {% csrf_token %} <!-- 보안을 위해 CSRF 토큰 추가. -->
+          {% include 'users/form_errors.html' %}<!-- 오류 메시지를 출력하는 템플릿 추가. -->
             <div>
               <label> User ID </label>
-              <input type="text" name="username"  id="username">
+              <input type="text" name="username"  id="username"> <!-- 아이디를 입력받는 인풋 생성. -->
             </div>
           </br>
             <div>
               <label> User PW </label>
-              <input type="password"name="password" id="password">
+              <input type="password"name="password" id="password"> <!-- 비밀번호를 입력받는 인풋 생성. -->
             </div>
           </br>
           <div class="d-grid gap-3 col-6 mx-auto">
-            <button class="btn btn-long text-white" style="background-color:#FC4C60;" type="submit">로그인</button>
-            <a class ="btn text-white "style="background-color:#FC4C60;" href="{% url 'users:signup' %}">회원가입</a>
+            <button class="btn btn-long text-white" style="background-color:#FC4C60;" type="submit">로그인</button><!-- 로그인 버튼 -->
+            <a class ="btn text-white "style="background-color:#FC4C60;" href="{% url 'users:signup' %}">회원가입</a><!-- 회원가입 버튼 -->
             </br>
           </div>
         </form>
