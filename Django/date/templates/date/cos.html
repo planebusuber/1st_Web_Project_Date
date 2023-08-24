@@ -41,7 +41,7 @@
             <h5>대표메뉴</h5> <p>{{rset_detail_list.rest_time}}</p>
             <h5>영업시간</h5> <p>{{rest_detail_list.rest_time}}</p>
             <h5>상세설명</h5> <p>{{rest_detail_list.rest_detail}}</p>
-            </hr>
+            <hr/>
 
             <div class="d-flex justify-content-center">
                 <img class="" src="/static/date/imgs/place_img/{{place_detail_list.place_img}}.jpg" alt="{{place_detail_list.place_img}}"width="300">
@@ -50,6 +50,10 @@
             <h5>주소</h5> <p>{{place_detail_list.place_addr}}</p>
             <h5>영업시간</h5> <p>{{place_detail_list.place_time}}</p>
             <h5>상세설명</h5> <p>{{place_detail_list.place_detail}}</p>
+
+        </div>
+        <div>
+            <a class="btn btn-primary float-end" href="/write/{{cafe_detail_list.cafe_num}}/{{rest_detail_list.rest_num}}/{{place_detail_list.place_num}}/" role="button">리뷰작성</a>
 
         </div>
     </div>
