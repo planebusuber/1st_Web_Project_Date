@@ -1,37 +1,27 @@
 {% extends "date/base.html" %}
 
-
 {% block main_area %}
 
-<!--{% if user.is_authenticated %}-->
-<!--    {% if user.is_superuser or user %}-->
-
-<!--        <a class="btn btn btn-sm text-white" style="background-color: #FC4C64;" href="/date/post_review/" role="button">-->
-<!--            <i class="fa-solid fa-pen-to-square" ></i>  글 쓰기-->
-<!--        </a>-->
-<!--    {% endif %}-->
-<!--{% endif %}글쓰기 코드 -->
-
 {% if review_list.exists %}
+
 {% for p in review_list %}
+
 <!-- Review post-->
 <div class="card mb-4" id="post-{{ p.pk }}">
     <div class ="row">
     </div>
+     <div class="card-header text-white lh-base" style="background-color: #FC4C60;"><h2 class="h4">{{ p.title }}</h2></div>
         <div class="card-body">
-            <div class="small text-muted"> {{ p.created_at }}</div>
+            <h2 class="h4">{{ p.title }}</h2>
             </br>
-            <h2 class="card-title h4">{{ p.title }}</h2>
-            </br>
-            <h5 class="card-title h6">{{ p.content }}</h5>
+            <h5 class="h6">{{ p.content }}</h5>
             <br/>
-            <br/>
-            <a class="btn text-white float-end" style="background-color: #FC4C64;" href="#">상세 보기 →</a>
+            <a class="btn text-white float-end" style="background-color: #FC4C60;" href="{{ p.pk }}/">보러 가기 →</a>
         </div>
-        <div class="card-footer text-white" style="background-color: #FC4C64; text-decoration: none; color: black"> {{ p.created_at }}
-        <a href="#" style="text-decoration: none; color: white" >{{ p.author | upper }}</a>
-    </div>
-    </div>
+        <div class="card-footer text-white" style="background-color: #FC4C60; text-decoration: none; color: black"> {{ p.created_at }}
+            <a href="#" style="text-decoration: none; color: white" >{{ p.author | upper }}</a>
+        </div>
+</div>
             {% endfor %}
             {% else %}
             <h3> 아직 게시물이 없습니다.</h3>

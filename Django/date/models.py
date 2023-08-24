@@ -201,10 +201,3 @@ class Review(models.Model): # Review 작성 모델
     def __str__(self):
         return self.title
 
-
-class Comment(models.Model): # 댓글 기능 모델
-    post = models.ForeignKey(Review, on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE) # 작성자
-    content = models.TextField() # 게시글
-    created_at = models.DateTimeField(auto_now_add=True) # 작성일자
-    modified_at =models.DateTimeField(auto_now=True) # 수정일자

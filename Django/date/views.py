@@ -1,12 +1,9 @@
 from django.contrib.auth.models import User
-from django.contrib import auth
-from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic import ListView, CreateView, DetailView
 from django.db import models
 from date.models import Cafe, Rest, Place, Review, Addr
-from .forms import ReviewWrite
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from .forms import ReviewWrite, Star
 import random
 
 class MainPage(ListView):
@@ -405,6 +402,8 @@ def ReviewUpdate(request, pk):
 
 class MyReview(ListView):
     model = Review
+    paginate_by = 5
+    ordering = ['-created_at']  # 게시글 최신순 정렬
     template_name = "date/my_review.html"
 
     def get_context_data(self, **kwargs):
@@ -412,4 +411,5 @@ class MyReview(ListView):
         current_user = self.request.user
         context["review_list"] = Review.objects.filter(author=current_user)
         return context
+
 

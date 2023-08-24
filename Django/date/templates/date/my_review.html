@@ -1,28 +1,54 @@
 {% extends "date/base.html" %}
 
 {% block main_area %}
-
-<div class="container">
-    {% for review in review_list %}
-    <div class="card">
-        <div class="card-header">
-            <h3>{{review.title}}</h3>
+    {% if review_list.exists %}
+    {% for p in review_list %}
+    <div class="card mb-4" id="post-{{ p.pk }}">
+        <div class ="row">
         </div>
-        <div class="card-body">
-            <p>{{review.content}}</p>
-            <p>{{review.score}}</p>
-        </div>
-        <div class="card-footer">
-            <div class=" float-end">
-                <a type="button" class="btn text-white" style="background-color: #FC4C64;" href="#">보러가기</a>&nbsp;
-                <a type="button" class="btn text-white" style="background-color: #FC4C64;" href="#">수정하기</a>&nbsp;
-                <a type="button" class="btn text-white" style="background-color: #FC4C64;" href="#">삭제하기</a>
+        <div class="card-header text-white " style="background-color: #FC4C60;"><h2 class="h4">{{ p.title }}</h2></div>
+            <div class="card-body">
+                <h2 class="h4">{{ p.title }}</h2>
+                </br>
+                <h5 class="h6">{{ p.content }}</h5>
+                <p class="h6">{{p.score}}</p>
+                </br>
+                <div class="float-end">
+                <a class="btn text-white" style="background-color: #FC4C60;" href="{{ p.pk }}" >보러 가기 →</a>
+                <a class="btn text-white" style="background-color: #FC4C60;" href="/review_update/{{ p.pk }}/">수정하기</a>&nbsp;
+                <a class="btn text-white" style="background-color: #FC4C60;" href="#">삭제하기</a>
+                </div>
             </div>
-
-        </div>
+             <div class="card-footer text-white" style="background-color: #FC4C60; text-decoration: none; color: black"> {{ p.created_at }}
+                <a href="" style="text-decoration: none; color: white" >{{ p.author | upper }}</a>
+            </div>
     </div>
-    <br/>
-    {%endfor%}
-</div>
+            {% endfor %}
+            {% else %}
+            <h3> 아직 게시물이 없습니다.</h3>
+            {% endif %}
+ <!-- Pagination-->
+    <nav aria-label="Pagination">
+        <hr class="my-0" />
+        <ul class="pagination justify-content-center my-4" >
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" style="background-color: #FFFFFF;" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Newer</a></li>
+            {% else %}
+            <li class="page-item disabled"><a class="page-link" style="background-color: #FFFFFF;" href="#!" tabindex="-1" aria-disabled="True">Newer</a></li>
+            {% endif %}
+            {% for page in paginator.page_range %}
+                {% if page == page_obj.number %}
+                    <li class="page-item active" aria-current="page"><a class="page-link" style="background-color: #FC4C64;" href="?page={{ page }}">{{ page }}</a></li>
+                {% else %}
+                    <li class="page-item" aria-current="page"><a class="page-link" style="background-color: #FC4C64;" href="?page={{ page }}">{{ page }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" style="background-color: #FFFFFF;" href="?page={{ page_obj.next_page_number }}">Older</a></li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link" style="background-color: #FFFFFF;" href="#">Older</a></li>
+            {% endif %}
+        </ul>
+    </nav>
 
 {%endblock%}

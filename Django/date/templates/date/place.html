@@ -51,8 +51,8 @@
         <div class="container">
             {%for cafe in cafe_list%}
                 <div class="card">
-                    <div class="card-header">
-                        <a href="/cafedetail/{{cafe.cafe_name}}/" style="text-decoration: none; color: black"> <h3>{{cafe.cafe_name}}</h3></a>
+                    <div class="card-header" style="background-color: #FC4C60;">
+                        <a href="/cafedetail/{{cafe.cafe_name}}/" style="text-decoration: none; color: white"> <h3>{{cafe.cafe_name}}</h3></a>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
@@ -70,8 +70,8 @@
 
             {%for rest in rest_list%}
                 <div class="card">
-                    <div class="card-header">
-                        <a href="/restdetail/{{rest.rest_name}}" style="text-decoration: none; color: black">  <h3>{{rest.rest_name}}</h3></a>
+                    <div class="card-header" style="background-color: #FC4C60;">
+                        <a href="/restdetail/{{rest.rest_name}}" style="text-decoration: none; color: white">  <h3>{{rest.rest_name}}</h3></a>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
@@ -88,8 +88,8 @@
 
             {%for place in place_list%}
                 <div class="card">
-                    <div class="card-header">
-                        <a href="/placedetail/{{place.place_name}}/" style="text-decoration: none; color: black"> <h3>{{place.place_name}}</h3></a>
+                    <div class="card-header" style="background-color: #FC4C60;">
+                        <a href="/placedetail/{{place.place_name}}/" style="text-decoration: none; color: white"> <h3>{{place.place_name}}</h3></a>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
