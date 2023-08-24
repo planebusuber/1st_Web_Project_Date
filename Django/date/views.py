@@ -1,18 +1,10 @@
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView
-from django.db import models
-from date.models import Cafe, Rest, Place, Review,Addr
-from date.forms import UserForm
-from django.contrib.auth import authenticate, login
-# Create your views here.
-
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 from django.db import models
-from date.models import Cafe, Rest, Place, Review,Addr
+from date.models import Cafe, Rest, Place, Review, Addr
 from .forms import ReviewWrite
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import random
@@ -354,7 +346,6 @@ class ReviewCreate(CreateView):
             form.instance.cafe_num = (self.kwargs["q1"])
             form.instance.rest_num = (self.kwargs["q2"])
             form.instance.place_num = (self.kwargs["q3"])
-
             # 태그와 관련된 작업을 하기 전에 form_valid() 결과값을 response에 저장
             response = super().form_valid(form)
 
@@ -370,24 +361,45 @@ class ReviewCreate(CreateView):
     def get_success_url(self):
         return reverse('my_review')
 
+class ReviewDetail(DetailView):
+    model = Review
+    template_name = "date/review_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+
+        pk = (self.kwargs["pk"])
+
+        review = Review.objects.get(pk=pk)
+
+        cafe = review.cafe_num
+        rest = review.rest_num
+        place = review.place_num
+
+        context["cafe_detail_list"] = Cafe.objects.get(cafe_num=cafe)
+        context["rest_detail_list"] = Rest.objects.get(rest_num=rest)
+        context["place_detail_list"] = Place.objects.get(place_num=place)
+
+        return context
+
 def ReviewUpdate(request, pk):
     # 이전 글의 데이터를 받아 옴
-    post = get_object_or_404(Review, pk=pk)
+    review = get_object_or_404(Review, pk=pk)
 
     # 글을 수정하기 위해 페이지에 접속 후 제출을 눌렀을 때, POST 방식을 사용한다는 전제를 두고 있기 때문에
     # form = ReviewWrite(request.POST, instance = post)로 활용
     if request.method == "POST":
-        form = ReviewWrite(request.POST, instance = post)
+        form = ReviewWrite(request.POST, instance = review)
 
         if form.is_valid():
             review = form.save(commit=False)
             review.save()
-            return redirect('review_list', pk = review.pk)
+            return redirect('review_detail', pk = review.pk)
 
     # 글을 수정하기 위해 페이지에 처음 접속했을 때(url로 get방식을 활용하기 때문에,
-    # form = PhotoForm(instance = post)에 request.POST를 집어넣을 필요가 없음
+    # form = ReviewWrite(instance = review)에 request.POST를 집어넣을 필요가 없음
     else:
-        form = ReviewWrite(instance = post)
+        form = ReviewWrite(instance = review)
         return render(request, 'date/review_update.html', {"form" : form})
 
 
@@ -398,8 +410,6 @@ class MyReview(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         current_user = self.request.user
-
         context["review_list"] = Review.objects.filter(author=current_user)
-
         return context
 
