@@ -1,6 +1,6 @@
 {% extends "date/base.html" %}
 {% load crispy_forms_tags %}
-
+{% include "django/forms/widgets/input.html" %}
 {% block head_title %}
 {{ review.title }} - Date
 {% endblock %}
@@ -22,17 +22,16 @@
                     <!-- 글 수정 버튼 작성-->
                     {% if user.is_authenticated and user == review.author %}
                         <a class = "btn float-end text-white" style= "background-color:#FC4C64;" href = "{% url 'review_update' pk=review.pk %}" role = "button">
-                            <i class="fa-solid fa-feather"></i>  Edit Review
+                            <i class="fa-solid fa-feather"></i>  수정하기
                         </a>
                     {% endif %}
                 </div>
             </div>
             <!-- 평가한 별점이 보이는 구역 -->
             <section class="mb-5">
+                {{ form | crispy}}
                 {{ form.media }}
-                <div id="star_{{ widget.attrs.id }}" class="rateit" data-rateit-backingfld="#{{ widget.attrs.id }}"></div>
-                <input type="rating" name="score" value="4" required="" id="id_score" min="0" max="5" step="1" style="display: none;">
-                {{ review.score }}
+
             </section>
         </header>
         <!-- Preview image figure-->

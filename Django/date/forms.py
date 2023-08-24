@@ -30,8 +30,16 @@ class ReviewWrite(forms.ModelForm):
         model = Review
         fields = [ "title",
                    "content",
-                   "score"
+                    "score",
                    ]
+        # widgets = {
+        #     'score': starWidget,
+        # }
+
+class Star(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = [ "score" ]
         widgets = {
-            'score': starWidget,
+            'score' : starWidget
         }

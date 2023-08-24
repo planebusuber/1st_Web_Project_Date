@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic import ListView, CreateView, DetailView
 from django.db import models
 from date.models import Cafe, Rest, Place, Review, Addr
-from .forms import ReviewWrite
+from .forms import ReviewWrite, Star
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import random
 
@@ -379,6 +379,7 @@ class ReviewDetail(DetailView):
         context["cafe_detail_list"] = Cafe.objects.get(cafe_num=cafe)
         context["rest_detail_list"] = Rest.objects.get(rest_num=rest)
         context["place_detail_list"] = Place.objects.get(place_num=place)
+        context["form"] = Star(instance=review)
 
         return context
 
