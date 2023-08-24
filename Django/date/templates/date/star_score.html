@@ -1,7 +1,10 @@
+<!-- static 폴더 경로 로드 -->
 {% load static %}
-
+<!-- 별점을 입력받기 위해 Django 내부에 딸린 input.html을 포함시킴 -->
 {% include "django/forms/widgets/input.html" %}
 
 {{ form.media }}
+<!-- 별모양 표시하도록 div 작성-->
+<!-- input 타입은 표현되지 않도록 display:none으로 설정-->
 <div id="star_{{ widget.attrs.id }}" class="rateit" data-rateit-backingfld="#{{ widget.attrs.id }}"></div>
 <input type="rating" name="score" id="id_score" min="0" max="5" step="1" style="display: none;">
