@@ -32,8 +32,10 @@
                           {{ user.username }}
                       </a>
                       <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/myreview/"> 내 리뷰보기</a>
                         <li><a class="dropdown-item" href="{% url 'users:logout' %}"> log out</a>
                       </ul>
+
                   </li>
              {% else %}
                   <li class="nav-item">

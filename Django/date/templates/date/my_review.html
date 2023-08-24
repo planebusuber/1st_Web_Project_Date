@@ -1,0 +1,28 @@
+{% extends "date/base.html" %}
+
+{% block main_area %}
+
+<div class="container">
+    {% for review in review_list %}
+    <div class="card">
+        <div class="card-header">
+            <h3>{{review.title}}</h3>
+        </div>
+        <div class="card-body">
+            <p>{{review.content}}</p>
+            <p>{{review.score}}</p>
+        </div>
+        <div class="card-footer">
+            <div class=" float-end">
+                <a type="button" class="btn btn-primary " href="#">보러가기</a>&nbsp;
+                <a type="button" class="btn btn-primary " href="#">수정하기</a>&nbsp;
+                <a type="button" class="btn btn-primary" href="#">삭제하기</a>
+            </div>
+
+        </div>
+    </div>
+    <br/>
+    {%endfor%}
+</div>
+
+{%endblock%}

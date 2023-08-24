@@ -366,7 +366,7 @@ class ReviewCreate(CreateView):
     #     current_user = self.request.user
     #     return current_user.is_authenticated
     def get_success_url(self):
-        return reverse('review_list')
+        return reverse('my_review')
 
 def ReviewUpdate(request, pk):
     # 이전 글의 데이터를 받아 옴
@@ -387,3 +387,15 @@ def ReviewUpdate(request, pk):
     else:
         form = ReviewWrite(instance = post)
         return render(request, 'date/review_update.html', {"form" : form})
+
+class MyReview(ListView):
+    model = Review
+    template_name = "date/my_review.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        current_user = self.request.user
+
+        context["review_list"] = Review.objects.filter(author=current_user)
+
+        return context
