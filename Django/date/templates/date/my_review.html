@@ -16,7 +16,7 @@
                 <div class="float-end">
                 <a class="btn text-white" style="background-color: #FC4C60;" href="{{ p.pk }}" >보러 가기 →</a>
                 <a class="btn text-white" style="background-color: #FC4C60;" href="/review_update/{{ p.pk }}/">수정하기</a>&nbsp;
-                <a class="btn text-white" style="background-color: #FC4C60;" href="#">삭제하기</a>
+                <a class="btn text-white" style="background-color: #FC4C60;" href="/review_delete/{{review.pk}}">삭제하기</a>
                 </div>
             </div>
              <div class="card-footer text-white" style="background-color: #FC4C60; text-decoration: none; color: black"> {{ p.created_at }}

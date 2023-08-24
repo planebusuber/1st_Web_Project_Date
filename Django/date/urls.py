@@ -11,8 +11,6 @@ urlpatterns = [
     path("place/rest/",views.PlaceRest.as_view(),name = "place_rest"),
     path("place/place/",views.PlacePlace.as_view(),name = "place_place"),
     path('login/', auth_views.LoginView.as_view(), name='login'),
-    # django.contrib.auth앱의 LoginView 클래스를 활용했으므로 별도의 views.py 파일 수정이 필요 없음
-
     path("place/cafe/<str:q>/",views.PlaceCafeLoc.as_view(),name = "place_cafe_loc"),
     path("place/rest/<str:q>/",views.PlaceRestLoc.as_view(),name = "place_rest_loc"),
     path("place/place/<str:q>/",views.PlacePlaceLoc.as_view(),name = "place_rest_loc"),
@@ -25,5 +23,6 @@ urlpatterns = [
     path("review_list/<int:pk>/", views.ReviewDetail.as_view(), name="review_detail"),
     path("myreview/<int:pk>/",views.ReviewDetail.as_view(), name="review_my_review_detail"),
     path("review_update/<int:pk>/", views.ReviewUpdate, name="review_update"),
+    path("review_delete/<int:pk>/", views.ReviewDelete, name="review_delete"),
 
 ]
