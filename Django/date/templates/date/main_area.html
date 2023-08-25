@@ -1,141 +1,203 @@
 {% extends "date/base.html" %}
 {% load crispy_forms_tags %}
 {% include "django/forms/widgets/input.html" %}
+
 {% block main_area %}
-<div class="container" xmlns="http://www.w3.org/1999/html">
 
-    <!--  주소를 설정하기 위한 부분  -->
-    <div class="row">
-        {% for i in addr_names %}
-        <div class="col">
-            <span class="badge badge-pill badge-primary"><a style="text-decoration: none; color: black" href="/main_area/{{i.addr_name}}/">{{i.addr_name}}</a></span>
-        </div>
-        {%endfor%}
-    </div>
-    <br/>
-    <!--    추천코스를 보여주기 위한 부분-->
-    <div class="row d-flex justify-content-end">
-
-        <div class="col-lg-9" id = "recommandation">
-            <div class="row  text-center">
-                <!--   추천코스 1번-->
-                <div class="col-lg-4 " id="rocom_1">
-                    <div class="card h-100 w-100">
-                        <div class="card-header text-white" style="background-color: #FC4C60;">
-                            <h3 style="font-family: 'Gowun Dodum', sans-serif; ">추천1</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row h-100 w-100 align-items-center">
-                                <div class="col">
-                                <a href="/cafedetail/{{cafe_recommed_1.cafe_name}}/" style="text-decoration: none;color: black"><p>{{cafe_recommed_1.cafe_name}}</p></a>
-                                <img src="/static/date/imgs/cafe_img/{{cafe_recommed_1.cafe_img}}.jpg" alt="{{cafe_recommed_1.cafe_img}}"width="150" height="150">
-                                <br/><br/>
-                                <a href="/restdetail/{{rest_recommed_1.rest_name}}/" style="text-decoration: none;color: black"><p>{{rest_recommed_1.rest_name}}</p></a>
-                                <img src="/static/date/imgs/rest_img/{{rest_recommed_1.rest_img}}.jpg" alt="{{rest_recommed_1.rest_img}}"width="150" height="150">
-                                <br/><br/>
-                                <a href="/placedetail/{{place_recommed_1.place_name}}/" style="text-decoration: none;color: black"><p>{{place_recommed_1.place_name}}</p></a>
-                                <img src="/static/date/imgs/place_img/{{place_recommed_1.place_img}}.jpg" alt="{{place_recommed_1.place_img}}"width="150" height="150">
-                                <br/><br/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer" style="background-color: #FC4C60;">
-                            <a type="button" class="btn text-white" style="background-color: #FC4C64;" href="/cos/{{cafe_recommed_1.cafe_num}}/{{rest_recommed_1.rest_num}}/{{place_recommed_1.place_num}}/">상세보기</a>
-                        </div>
-                    </div>
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+        <!-- 주소를 설정하기 위한 부분 -->
+        <div class="row">
+            {% for i in addr_names %}
+                <div class="col">
+                    <span class="badge badge-pill badge-primary">
+                        <a style="text-decoration: none; color: black" href="/main_area/{{i.addr_name}}/">
+                            {{ i.addr_name }}
+                        </a>
+                    </span>
                 </div>
-                <!--   추천코스 2번-->
-                <div class="col-lg-4" id="rocom_2">
-                    <div class="card h-100 w-100">
-                         <div class="card-header text-white" style="background-color: #FC4C60;">
-                            <h3 style="font-family: 'Gowun Dodum', sans-serif;">추천2</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row h-100 w-100 align-items-center">
-                               <div class="col">
-                                    <a href="/cafedetail/{{cafe_recommed_2.cafe_name}}/" style="text-decoration: none;color: black"><p>{{cafe_recommed_2.cafe_name}}</p></a>
-                                    <img src="/static/date/imgs/cafe_img/{{cafe_recommed_2.cafe_img}}.jpg" alt="{{cafe_recommed_2.cafe_img}}"width="150" height="150">
-                                    <br/><br/>
-                                    <a href="/restdetail/{{rest_recommed_2.rest_name}}/" style="text-decoration: none;color: black"><p>{{rest_recommed_2.rest_name}}</p></a>
-                                    <img src="/static/date/imgs/rest_img/{{rest_recommed_2.rest_img}}.jpg" alt="{{rest_recommed_2.rest_img}}"width="150" height="150">
-                                    <br/><br/>
-                                    <a href="/placedetail/{{place_recommed_2.place_name}}/" style="text-decoration: none;color: black"><p>{{place_recommed_2.place_name}}</p></a>
-                                    <img src="/static/date/imgs/place_img/{{place_recommed_2.place_img}}.jpg" alt="{{place_recommed_2.place_img}}"width="150" height="150">
-                                    <br/><br/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer" style="background-color: #FC4C60;">
-                            <a type="button" class="btn text-white" style="background-color: #FC4C64;" href="/cos/{{cafe_recommed_2.cafe_num}}/{{rest_recommed_2.rest_num}}/{{place_recommed_2.place_num}}/">상세보기</a>
-                        </div>
-                    </div>
-                </div>
-                <!--   추천코스 3번-->
-                <div class="col-lg-4  d-flex justify-content-center" id="rocom_3">
-                    <div class="card h-100 w-100">
-                         <div class="card-header text-white" style="background-color: #FC4C60;">
-                            <h3 style="font-family: 'Gowun Dodum', sans-serif;">추천3</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row h-100 w-100 align-items-center">
-                                <div class="col">
-                                    <a href="/cafedetail/{{cafe_recommed_3.cafe_name}}/" style="text-decoration: none;color: black"><p>{{cafe_recommed_3.cafe_name}}</p></a>
-                                    <img src="/static/date/imgs/cafe_img/{{cafe_recommed_3.cafe_img}}.jpg" alt="{{cafe_recommed_3.cafe_img}}"width="150" height="150">
-                                    <br/><br/>
-                                    <a href="/restdetail/{{rest_recommed_3.rest_name}}/" style="text-decoration: none;color: black"><p>{{rest_recommed_3.rest_name}}</p></a>
-                                    <img src="/static/date/imgs/rest_img/{{rest_recommed_3.rest_img}}.jpg" alt="{{rest_recommed_3.rest_img}}"width="150" height="150">
-                                    <br/><br/>
-                                    <a href="/placedetail/{{place_recommed_3.place_name}}/" style="text-decoration: none;color: black"><p>{{place_recommed_3.place_name}}</p></a>
-                                    <img src="/static/date/imgs/place_img/{{place_recommed_3.place_img}}.jpg" alt="{{place_recommed_3.place_img}}"width="150" height="150">
-                                    <br/><br/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer" style="background-color: #FC4C60;">
-                            <a type="button" class="btn text-white" style="background-color: #FC4C64;" href="/cos/{{cafe_recommed_3.cafe_num}}/{{rest_recommed_3.rest_num}}/{{place_recommed_3.place_num}}/">상세보기</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-        <!-- 날씨 위젯을 보여주는 부분-->
-        <div class="col-lg-3" id ="weather">
-            <div id="ww_88067e04ea43f" v='1.3' loc='auto' a='{"t":"horizontal","lang":"ko","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one","sl_sot":"celsius","cl_bkg":"#FC4C64;","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#FFFFFF","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FFFFFF"}'>
-                Weather Data Source:
-                <a href="https://wetterlang.de/wetter_14_tage/" id="ww_88067e04ea43f_u" target="_blank">
-                    Wetter fur 14 tage
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <hr/>
-
-    <!-- 별점 높은 순으로 리뷰 3개를 보여주는 부분 -->
-<div class="row text-center" id = "review">
-    <div class="col-lg-12" id = "Most_like">
+         <br/>
+        <!-- 추천코스를 보여주기 위한 부분 -->
         <div class="row d-flex justify-content-end">
-            {% for review in review_top %}
-            <div class="col-lg-4">
-                <div class="card h-100">
-                    <div class="card-header text-white h-100" style="background-color: #FC4C60;">
-                        <h3>{{ review.title }}</h3>
+            <div class="col-lg-9" id = "recommandation">
+                <div class="row  text-center">
+
+                    <!-- 추천코스 1번 -->
+                    <div class="col-lg-4 " id="rocom_1">
+                        <div class="card h-100 w-100">
+                            <div class="card-header text-white" style="background-color: #FC4C60;">
+                                <h3 style="font-family: 'Gowun Dodum', sans-serif; ">
+                                    추천1
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row h-100 w-100 align-items-center">
+                                    <div class="col">
+                                        <a href="/cafedetail/{{cafe_recommed_1.cafe_name}}/"
+                                           style="text-decoration: none;color: black">
+                                            <p>{{ cafe_recommed_1.cafe_name }}</p>
+                                        </a>
+                                        <img src="/static/date/imgs/cafe_img/{{cafe_recommed_1.cafe_img}}.jpg"
+                                             alt="{{cafe_recommed_1.cafe_img}}" width="150" height="150">
+                                            <br/><br/>
+                                        <a href="/restdetail/{{rest_recommed_1.rest_name}}/"
+                                           style="text-decoration: none;color: black">
+                                            <p>{{ rest_recommed_1.rest_name }}</p>
+                                        </a>
+                                        <img src="/static/date/imgs/rest_img/{{rest_recommed_1.rest_img}}.jpg"
+                                             alt="{{rest_recommed_1.rest_img}}" width="150" height="150">
+                                            <br/><br/>
+                                        <a href="/placedetail/{{place_recommed_1.place_name}}/"
+                                           style="text-decoration: none;color: black">
+                                            <p>{{ place_recommed_1.place_name }}</p>
+                                        </a>
+                                        <img src="/static/date/imgs/place_img/{{place_recommed_1.place_img}}.jpg"
+                                             alt="{{place_recommed_1.place_img}}" width="150" height="150">
+                                        <br/><br/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer" style="background-color: #FC4C60;">
+                                <a type="button" class="btn text-white" style="background-color: #FC4C64;"
+                                   href="/cos/{{cafe_recommed_1.cafe_num}}/{{rest_recommed_1.rest_num}}/{{place_recommed_1.place_num}}/">
+                                    상세보기
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <a>{{ review.author }}</a>
-                        </br>
-                        <a>{{ review.content |  truncatewords_html:40 }}</a>
+
+                    <!--   추천코스 2번-->
+                    <div class="col-lg-4" id="rocom_2">
+                        <div class="card h-100 w-100">
+                            <div class="card-header text-white" style="background-color: #FC4C60;">
+                                <h3 style="font-family: 'Gowun Dodum', sans-serif;">
+                                    추천2
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row h-100 w-100 align-items-center">
+                                    <div class="col">
+                                        <a href="/cafedetail/{{cafe_recommed_2.cafe_name}}/"
+                                           style="text-decoration: none;color: black">
+                                            <p>{{ cafe_recommed_2.cafe_name }}</p>
+                                        </a>
+                                        <img src="/static/date/imgs/cafe_img/{{cafe_recommed_2.cafe_img}}.jpg"
+                                             alt="{{cafe_recommed_2.cafe_img}}"width="150" height="150">
+                                            <br/><br/>
+                                        <a href="/restdetail/{{rest_recommed_2.rest_name}}/"
+                                           style="text-decoration: none;color: black">
+                                            <p>{{ rest_recommed_2.rest_name }}</p>
+                                        </a>
+                                        <img src="/static/date/imgs/rest_img/{{rest_recommed_2.rest_img}}.jpg"
+                                             alt="{{rest_recommed_2.rest_img}}"width="150" height="150">
+                                            <br/><br/>
+                                        <a href="/placedetail/{{place_recommed_2.place_name}}/"
+                                           style="text-decoration: none;color: black">
+                                            <p>{{ place_recommed_2.place_name }}</p>
+                                        </a>
+                                        <img src="/static/date/imgs/place_img/{{place_recommed_2.place_img}}.jpg"
+                                             alt="{{place_recommed_2.place_img}}"width="150" height="150">
+                                        <br/><br/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer" style="background-color: #FC4C60;">
+                                <a type="button" class="btn text-white" style="background-color: #FC4C64;"
+                                    href="/cos/{{cafe_recommed_2.cafe_num}}/{{rest_recommed_2.rest_num}}/{{place_recommed_2.place_num}}/">
+                                    상세보기
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-footer text-white" style="background-color: #FC4C60;">
-                        <a class="btn text-white" style="background-color: #FC4C64;" href="/review_list/{{review.pk}}/">상세 보기</a>
+
+                    <!--   추천코스 3번-->
+                    <div class="col-lg-4  d-flex justify-content-center" id="rocom_3">
+                        <div class="card h-100 w-100">
+                            <div class="card-header text-white" style="background-color: #FC4C60;">
+                                <h3 style="font-family: 'Gowun Dodum', sans-serif;">
+                                    추천3
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row h-100 w-100 align-items-center">
+                                    <div class="col">
+                                        <a href="/cafedetail/{{cafe_recommed_3.cafe_name}}/" style="text-decoration: none;color: black">
+                                            <p>{{ cafe_recommed_3.cafe_name }}</p>
+                                        </a>
+                                        <img src="/static/date/imgs/cafe_img/{{cafe_recommed_3.cafe_img}}.jpg"
+                                             alt="{{cafe_recommed_3.cafe_img}}"width="150" height="150">
+                                            <br/><br/>
+                                        <a href="/restdetail/{{rest_recommed_3.rest_name}}/"
+                                            style="text-decoration: none;color: black">
+                                            <p>{{ rest_recommed_3.rest_name }}</p>
+                                        </a>
+                                        <img src="/static/date/imgs/rest_img/{{rest_recommed_3.rest_img}}.jpg"
+                                             alt="{{rest_recommed_3.rest_img}}"width="150" height="150">
+                                            <br/><br/>
+                                        <a href="/placedetail/{{place_recommed_3.place_name}}/"
+                                            style="text-decoration: none;color: black">
+                                            <p>{{ place_recommed_3.place_name }}</p>
+                                        </a>
+                                        <img src="/static/date/imgs/place_img/{{place_recommed_3.place_img}}.jpg"
+                                             alt="{{place_recommed_3.place_img}}"width="150" height="150">
+                                            <br/><br/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer" style="background-color: #FC4C60;">
+                                <a type="button" class="btn text-white" style="background-color: #FC4C64;"
+                                   href="/cos/{{cafe_recommed_3.cafe_num}}/{{rest_recommed_3.rest_num}}/{{place_recommed_3.place_num}}/">
+                                    상세보기
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            {%endfor %}
+
+            <!-- 날씨 위젯을 보여주는 부분-->
+            <div class="col-lg-3" id ="weather">
+                <div id="ww_88067e04ea43f" v='1.3' loc='auto' a='{"t":"horizontal","lang":"ko","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one","sl_sot":"celsius","cl_bkg":"#FC4C64;","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#FFFFFF","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FFFFFF"}'>
+                    Weather Data Source:
+                    <a href="https://wetterlang.de/wetter_14_tage/" id="ww_88067e04ea43f_u" target="_blank">
+                        Wetter fur 14 tage
+                    </a>
+                </div>
+            </div>
+        </div>
+        <hr/>
+
+        <!-- 별점 높은 순으로 리뷰 3개를 보여주는 부분 -->
+        <div class="row text-center" id = "review">
+            <div class="col-lg-12" id = "Most_like">
+                <div class="row d-flex justify-content-end">
+                    {% for review in review_top %}
+                    <div class="col-lg-4">
+                        <div class="card h-100">
+                            <div class="card-header text-white h-100" style="background-color: #FC4C60;">
+                                <h3>{{ review.title }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <a>{{ review.author }}</a>
+                                    </br>
+                                <a>{{ review.content |  truncatewords_html:40 }}</a>
+                            </div>
+                            <div class="card-footer text-white" style="background-color: #FC4C60;">
+                                <a class="btn text-white" style="background-color: #FC4C64;"
+                                   href="/review_list/{{review.pk}}/">
+                                    상세 보기
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- 날씨 위젯 스크립트 -->
-<script async src="https://app2.weatherwidget.org/js/?id=ww_88067e04ea43f"></script>
+
+    <!-- 날씨 위젯 스크립트 -->
+    <script async src="https://app2.weatherwidget.org/js/?id=ww_88067e04ea43f"></script>
+
 {% endblock %}

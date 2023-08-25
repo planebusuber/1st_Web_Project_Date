@@ -1,57 +1,60 @@
 {% extends "date/base.html" %}
 
 {% block main_area %}
+
     <div class="container">
         {% if check == 1 %}
-
-        <div class="card">
-            <div class="card-header">
-                <h3>{{cafe_detail_list.cafe_name}}</h3>
-            </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-center">
-                    <img class="" src="/static/date/imgs/cafe_img/{{cafe_detail_list.cafe_img}}.jpg" alt="{{cafe_detail_list.cafe_img}}"width="300">
+            <div class="card">
+                <div class="card-header text-white" style="background-color:#FC4C60;">
+                    <h3>{{ cafe_detail_list.cafe_name }}</h3>
                 </div>
-                <h5>주소</h5> <p>{{cafe_detail_list.cafe_addr}}</p>
-                <h5>대표메뉴</h5> <p>{{cafe_detail_list.cafe_time}}</p>
-                <h5>영업시간</h5> <p>{{cafe_detail_list.cafe_time}}</p>
-                <h5>상세설명</h5> <p>{{cafe_detail_list.cafe_detail}}</p>
-
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                        <img class="" src="/static/date/imgs/cafe_img/{{cafe_detail_list.cafe_img}}.jpg"
+                             alt="{{cafe_detail_list.cafe_img}}"width="300">
+                    </div>
+                    <h5>주소</h5> <p>{{ cafe_detail_list.cafe_addr }}</p>
+                    <h5>대표메뉴</h5> <p>{{ cafe_detail_list.cafe_menu }}</p>
+                    <h5>영업시간</h5> <p>{{ cafe_detail_list.cafe_time }}</p>
+                    <h5>상세설명</h5> <p>{{ cafe_detail_list.cafe_detail }}</p>
+                </div>
             </div>
-        </div>
         {% endif %}
 
-        {%if check == 2%}
-        <div class="card">
-            <div class="card-header">
-                <h3>{{rest_detail_list.rest_name}}</h3>
-            </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-center">
-                    <img class="" src="/static/date/imgs/rest_img/{{rest_detail_list.rest_img}}.jpg" alt="{{rest_detail_list.rest_img}}"width="300">
+        {% if check == 2 %}
+            <div class="card">
+                <div class="card-header text-white" style="background-color:#FC4C60;">
+                    <h3>{{ rest_detail_list.rest_name }}</h3>
                 </div>
-                <h5>주소</h5> <p>{{rest_detail_list.rest_addr}}</p>
-                <h5>대표메뉴</h5> <p>{{rest_detail_list.rest_time}}</p>
-                <h5>영업시간</h5> <p>{{rest_detail_list.rest_time}}</p>
-                <h5>상세설명</h5> <p>{{rest_detail_list.rest_detail}}</p>
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                        <img class="" src="/static/date/imgs/rest_img/{{rest_detail_list.rest_img}}.jpg"
+                             alt="{{rest_detail_list.rest_img}}"width="300">
+                    </div>
+                    <h5>주소</h5> <p>{{ rest_detail_list.rest_addr }}</p>
+                    <h5>대표메뉴</h5> <p>{{ rest_detail_list.rest_menu }}</p>
+                    <h5>영업시간</h5> <p>{{ rest_detail_list.rest_time }}</p>
+                    <h5>상세설명</h5> <p>{{ rest_detail_list.rest_detail }}</p>
+                </div>
             </div>
-        </div>
-        {%endif%}
+        {% endif %}
 
-        {%if check == 3%}
-        <div class="card">
-            <div class="card-header">
-                <h3>{{place_detail_list.place_name}}</h3>
-            </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-center">
-                    <img class="" src="/static/date/imgs/place_img/{{place_detail_list.place_img}}.jpg" alt="{{place_detail_list.place_img}}"width="300">
+        {% if check == 3 %}
+            <div class="card">
+                <div class="card-header text-white" style="background-color:#FC4C60;">
+                    <h3>{{ place_detail_list.place_name }}</h3>
                 </div>
-                <h5>주소</h5> <p>{{place_detail_list.place_addr}}</p>
-                <h5>영업시간</h5> <p>{{place_detail_list.place_time}}</p>
-                <h5>상세설명</h5> <p>{{place_detail_list.place_detail}}</p>
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                        <img class="" src="/static/date/imgs/place_img/{{place_detail_list.place_img}}.jpg"
+                             alt="{{place_detail_list.place_img}}"width="300">
+                    </div>
+                    <h5>주소</h5> <p>{{ place_detail_list.place_addr }}</p>
+                    <h5>영업시간</h5> <p>{{ place_detail_list.place_time }}</p>
+                    <h5>상세설명</h5> <p>{{ place_detail_list.place_detail }}</p>
+                </div>
             </div>
-        </div>
-        {%endif%}
+        {% endif % }
     </div>
-{%endblock%}
+
+{% endblock %}

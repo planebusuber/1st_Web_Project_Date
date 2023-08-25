@@ -170,10 +170,10 @@ class PlaceRest(ListView):
         context["check"] = 2
         return context
 
-#장소페이지에서 식당을 클릭했을 때 보여줄 페이지
+# 장소페이지에서 관광지를 클릭했을 때 보여줄 페이지
 class PlacePlace(ListView):
-    models = Place  #모델은 place를 사용
-    template_name = "date/place.html"   #템플릿을 설정
+    models = Place  # 모델은 place를 사용
+    template_name = "date/place.html"   # 템플릿을 설정
 
     def get_queryset(self):
         place_list = Place.objects.all()
@@ -194,14 +194,14 @@ class PlacePlace(ListView):
 
 #장소페이지에서 카페와 장소를 클릭했을 때 보여줄 뷰
 class PlaceCafeLoc(ListView):
-    models = Cafe   #모델은 cafe를 사용
-    template_name = "date/place.html"   #템플릿을 설정
+    models = Cafe   # 모델은 cafe를 사용
+    template_name = "date/place.html"   # 템플릿을 설정
 
     #가져올 데이터를 설정
     def get_queryset(self):
-        #주소창으로 받아온 데이터
+        # 주소창으로 받아온 데이터
         q = self.kwargs["q"]
-        #주소창으로 받아온 데이터로 리스트 조회
+        # 주소창으로 받아온 데이터로 리스트 조회
         cafe_list_loc = Cafe.objects.filter(cafe_addr__contains=q)
 
         return cafe_list_loc
