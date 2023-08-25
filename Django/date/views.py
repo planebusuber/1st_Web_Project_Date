@@ -328,55 +328,73 @@ class CosPage(ListView):
         print(q1)
         return context
 
+# 리뷰 생성을 위한 view 작성(CBV)
 class ReviewCreate(CreateView):
+    # model은 Review 모델을 사용
     model = Review
+    # Forms.py에서 작성한 ReviewWrite를 통째로 사용
     form_class = ReviewWrite
+    # 템플릿 지정
     template_name = "date/review_form.html"
 
+    # 요청이 유효할 경우의 함수 작성
     def form_valid(self, form):
         current_user = self.request.user
+        # 사용자가 로그인한 상태라면
         if current_user.is_authenticated:
+            # current_user를 author에 저장
             form.instance.author = current_user
+            # cafe_num을 q1에 저장, 리뷰 상세페이지의 주소로 활용하기 위함
             form.instance.cafe_num = (self.kwargs["q1"])
+            # rest_num을 q2에 저장, 리뷰 상세페이지의 주소로 활용하기 위함
             form.instance.rest_num = (self.kwargs["q2"])
+            # place_num을 q3에 저장, 리뷰 상세페이지의 주소로 활용하기 위함
             form.instance.place_num = (self.kwargs["q3"])
             # 태그와 관련된 작업을 하기 전에 form_valid() 결과값을 response에 저장
             response = super().form_valid(form)
-
+            # 저장된 response 값을 반환
             return response
 
+        # 그 외의 경우 대문페이지로 이동
         else:
             return redirect("/")
 
-        # 권한이 있는지 체크하는 함수
-    # def test_func(self):
-    #     current_user = self.request.user
-    #     return current_user.is_authenticated
+    # 성공할 경우 my_review 라는 주소를 가진 페이지로 이동
     def get_success_url(self):
         return reverse('my_review')
 
+# 리뷰 상세페이지 구현(CBV)
 class ReviewDetail(DetailView):
+    # model은 Review 모델을 사용
     model = Review
+    # 템플릿 지정
     template_name = "date/review_detail.html"
 
+    # 작성된 리뷰를 불러오기 위해 함수 작성
     def get_context_data(self, **kwargs):
+        # get_context_data 메서드를 호출하여 초기 컨텍스트를 가져옴
         context = super().get_context_data()
 
         pk = (self.kwargs["pk"])
-
+        # review에 Review모델에 작성된 내용을 pk를 기준으로 읽어들임
         review = Review.objects.get(pk=pk)
 
+        # 추천이 다 다르게 진행되기 때문에 해당 정보를 불러오기 위해 번호 정보를 지정
+        # Review모델에서 선언한 cafe_num, rest_num, place_num 활용
         cafe = review.cafe_num
         rest = review.rest_num
         place = review.place_num
 
+        # context를 통해 카페, 식당, 관광지의 정보와 별점 평가된 정보를 불러옴
         context["cafe_detail_list"] = Cafe.objects.get(cafe_num=cafe)
         context["rest_detail_list"] = Rest.objects.get(rest_num=rest)
         context["place_detail_list"] = Place.objects.get(place_num=place)
         context["form"] = Star(instance=review)
 
+        # context를 반환
         return context
 
+# 리뷰 수정 view 작성(FBV)
 def ReviewUpdate(request, pk):
     # 이전 글의 데이터를 받아 옴
     review = get_object_or_404(Review, pk=pk)
@@ -386,9 +404,12 @@ def ReviewUpdate(request, pk):
     if request.method == "POST":
         form = ReviewWrite(request.POST, instance = review)
 
+        # form이 유효할 경우
         if form.is_valid():
             review = form.save(commit=False)
+            # 수정된 내용을 저장
             review.save()
+            # 수정하기를 눌렀던 상세페이지로 돌아가게 함
             return redirect('review_detail', pk = review.pk)
 
     # 글을 수정하기 위해 페이지에 처음 접속했을 때(url로 get방식을 활용하기 때문에,
@@ -397,25 +418,37 @@ def ReviewUpdate(request, pk):
         form = ReviewWrite(instance = review)
         return render(request, 'date/review_update.html', {"form" : form})
 
-
+# 내가 작성한 리뷰만 볼 수 있는 View(CBV)
 class MyReview(ListView):
+    # model은 Review 모델을 사용
     model = Review
+    # 페이지네이션 기능 사용(Django에 탑재된 기능, import 필요)
     paginate_by = 5
-    ordering = ['-created_at']  # 게시글 최신순 정렬
+    # 게시글 최신순 정렬
+    ordering = ['-created_at']
+    # 템플릿 설정
     template_name = "date/my_review.html"
 
+    # 내가 작성한 리뷰를 불러오기 위해 함수 작성
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
+        # current_user : 현재 로그인된 사용자를 나타내는 속성
         current_user = self.request.user
+        # 작성자가 현재 로그인된 사용자인 Review의 정보만 담아올 수 있게 함
         context["review_list"] = Review.objects.filter(author=current_user)
+        # context 값 출력
         return context
 
+# 리뷰 삭제를 위한 view 작성(FBV)
 def ReviewDelete(request, pk):
+    # review의 내용을 담아옴
     review = get_object_or_404(Review, pk=pk)
 
+    # 해당 삭제요청을 한 사용자와 작성자가 일치하는 경우
     if request.user.is_authenticated and request.user == review.author:
-        # 조건을 만족하면 댓글을 삭제하고 댓글이 달려있던 게시글의 상세페이지로 리다이렉트
+        # 리뷰를 삭제하고 리뷰의 상세페이지로 리다이렉트
         review.delete()
         return redirect("/myreview/")
+    # 그 외의 경우에는 권한 거부 예외를 발생시킴
     else:
         PermissionDenied
