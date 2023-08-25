@@ -3,6 +3,7 @@
 {% block main_area %}
 
     <div class="container">
+        <!--  카페,식당,관광지 중 하나를 선택하는 부분-->
         <div class="row d-flex justify-content-center">
             <div class="col-2">
                 <span class="badge badge-pill badge-primary"><a style="text-decoration: none; color: black" href="/place/cafe/">카페</a></span>
@@ -15,6 +16,9 @@
             </div>
         </div>
         <br/>
+
+        <!--카페,식당,관광지를 선택했을 때 주소를 설정하는 부분-->
+        <!-- 카페,식당,관광지중 하나를 선택해야 이부분이 보임 -->
         {% if crp_check == 1 %}
             <div class="row">
                 {% for i in addr_names %}
@@ -34,8 +38,10 @@
             <br/>
         {%endif%}
 
+    <!-- 리스트를 보여주는 부분 -->
     <div class="container d-flex justify-content-center">
         <div class="container">
+            <!-- 카페를 골랐을 때 카페리스트가 보이는 부분 -->
             {%for cafe in cafe_list%}
                 <div class="card">
                     <div class="card-header" style="background-color: #FC4C60;">
@@ -54,7 +60,7 @@
                 </br>
             {% endfor %}
 
-
+            <!-- 식당을 골랐을 때 식당리스트가 보이는 부분 -->
             {%for rest in rest_list%}
                 <div class="card">
                     <div class="card-header" style="background-color: #FC4C60;">
@@ -73,7 +79,7 @@
                 <br/>
                 {%endfor%}
 
-
+            <!-- 관광지를 골랐을 때 관광지리스트가 보이는 부분 -->
             {%for place in place_list%}
                 <div class="card">
                     <div class="card-header" style="background-color: #FC4C60;">
