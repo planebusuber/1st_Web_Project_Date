@@ -472,8 +472,6 @@ class MyReview(ListView):
     model = Review
     # 페이지네이션 기능 사용(Django에 탑재된 기능, import 필요)
     paginate_by = 5
-    # 게시글 최신순 정렬
-    ordering = ['-created_at']
     # 템플릿 설정
     template_name = "date/my_review.html"
 
@@ -483,7 +481,7 @@ class MyReview(ListView):
         # current_user : 현재 로그인된 사용자를 나타내는 속성
         current_user = self.request.user
         # 작성자가 현재 로그인된 사용자인 Review의 정보만 담아올 수 있게 함
-        context["review_list"] = Review.objects.filter(author=current_user)
+        context["review_list"] = Review.objects.filter(author=current_user).order_by('-created_at')
         # context 값 출력
         return context
 
