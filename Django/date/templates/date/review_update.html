@@ -1,19 +1,22 @@
 {% extends "date/base.html" %}
-
 {% load crispy_forms_tags %}
-
 {% include "django/forms/widgets/input.html" %}
 
-{% block head_title %}Edit Review{% endblock %}
+{% block head_title %}
+Edit Review
+{% endblock %}
 
 {% block main_area %}
+
     <h1>Edit Review</h1>
     <hr/>
-   <form method="post" enctype="multipart/form-data">{% csrf_token %}
-        {{ form | crispy }}
+    <form method="post" enctype="multipart/form-data">
+       {% csrf_token %}
+       {{ form | crispy }}
         </br>
-        <button type="submit" class="btn float-end text-white" style="background-color:#FC4C64;">수정하기</button>
+       <button type="submit" class="btn float-end text-white" style="background-color:#FC4C64;">수정하기</button>
     </form>
     </br>
     </br>
+
 {% endblock %}

@@ -50,12 +50,6 @@ class MainPage(ListView):
 
         return context
 
-# 리뷰의 리스트들을 보여주는 뷰
-class ReviewList(ListView):
-    model = Review # 모델을 Review로 설정
-    paginate_by = 5 # 한 페이지에 5개 까지 보여지게 함
-    ordering = ['-created_at'] # 게시글 최신순 정렬
-    template_name = "date/review_list.html" # 템플릿 지정
 
 #메인페이지에서 주소를 클릭했을 때 보여질 뷰
 class SelectPage(ListView):
@@ -348,6 +342,15 @@ class CosPage(ListView):
         context["place_detail_list"] = Place.objects.get(place_num=q3)
         print(q1)
         return context
+
+
+# 리뷰의 리스트들을 보여주는 뷰
+class ReviewList(ListView):
+    model = Review # 모델을 Review로 설정
+    paginate_by = 5 # 한 페이지에 5개 까지 보여지게 함
+    ordering = ['-created_at'] # 게시글 최신순 정렬
+    template_name = "date/review_list.html" # 템플릿 지정
+
 
 # 리뷰 생성을 위한 view 작성(CBV)
 class ReviewCreate(CreateView):
