@@ -1,13 +1,10 @@
 {% extends "date/base.html" %}
 {% load crispy_forms_tags %}
 {% include "django/forms/widgets/input.html" %}
-
 {% block head_title %}
 {{ review.title }} - Date
 {% endblock %}
-
 {% block main_area %}
-
     <div id="post-area">
         <!-- Post content-->
         <article>
@@ -41,7 +38,6 @@
                     {{ form.media }}
                 </section>
             </header>
-
             <!-- Preview image figure-->
             <div class="row h-100 w-100 align-items-center">
                 <!-- cafe_image -->
@@ -107,5 +103,11 @@
             </div>
         </article>
     </div>
-
 {% endblock %}
+
+
+
+
+
+
+

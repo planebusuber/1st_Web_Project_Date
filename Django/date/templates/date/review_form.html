@@ -1,21 +1,19 @@
 {% extends "date/base.html" %}
+
 {% load crispy_forms_tags %}
+
 {% include "django/forms/widgets/input.html" %}
 
-{% block head_title %}
-Create Review
-{% endblock %}
+{% block head_title %}Create Review{% endblock %}
 
 {% block main_area %}
     <h1>리뷰 작성</h1>
     <hr/>
     <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}    <!-- csrf토큰 생성(보안) -->
+        {% csrf_token %}    <!-- csrf토큰 생성(보안-->
         {{ form | crispy }}
         </br>
-        <button type = "submit" class = "btn float-end text-white" style= "background-color:#FC4C64;">
-            리뷰 올리기
-        </button>
+        <button type = "submit" class = "btn float-end text-white" style= "background-color:#FC4C64;">리뷰 올리기</button>
     </form>
     <br>
 
