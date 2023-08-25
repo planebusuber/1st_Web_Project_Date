@@ -5,15 +5,18 @@ from .forms import ReviewWrite, Star
 import random
 from django.core.exceptions import PermissionDenied #권한 없는 유저 거르기
 
+#메인페이지 구성을 위한 뷰
 class MainPage(ListView):
-    model = Cafe
-    template_name = "date/main_area.html"
+    model = Cafe    #cafe 모델사용
+    template_name = "date/main_area.html"   #템플릿사용
 
+    #가져올 데이터 설정
     def get_context_data(self, **kwargs):
         context =super().get_context_data()
-
+        #주소 설정을 위한 데이터
         context["addr_names"] = Addr.objects.all()
-
+        #추천코스중 카페를 구성하기 위한 데이터
+        #카페데이터중 랜덤으로 하나를 가져옴
         cafe_max = Cafe.objects.all().count()
         cafe_ran = random.randint(0,cafe_max-1)
         context["cafe_recommed_1"] = Cafe.objects.all()[cafe_ran]
@@ -22,8 +25,8 @@ class MainPage(ListView):
         cafe_ran = random.randint(0,cafe_max-1)
         context["cafe_recommed_3"] = Cafe.objects.all()[cafe_ran]
 
-
-
+        #추천코스중 식당을 구성하기 위한 데이터
+        #식당데이터중 랜덤으로 하나를 가져옴
         rest_max = Rest.objects.all().count()
         rest_ran = random.randint(0, rest_max-1)
         context["rest_recommed_1"] = Rest.objects.all()[rest_ran]
@@ -32,6 +35,8 @@ class MainPage(ListView):
         rest_ran = random.randint(0, rest_max-1)
         context["rest_recommed_3"] = Rest.objects.all()[rest_ran]
 
+        #추천코스중 관광지를 구성하기 위한 데이터
+        #관광지데이터중 랜덤으로 하나를 가져옴
         place_max = Place.objects.all().count()
         place_ran = random.randint(0, place_max-1)
         context["place_recommed_1"] = Place.objects.all()[place_ran]
@@ -40,6 +45,7 @@ class MainPage(ListView):
         place_ran = random.randint(0, place_max-1)
         context["place_recommed_3"] = Place.objects.all()[place_ran]
 
+        #별점높은 순으로 정렬후 3개를 가져옴
         context["review_top"] = Review.objects.all().order_by('-score')[:3]
 
         return context
@@ -69,22 +75,26 @@ def form_valid(self, form):
     else:
         return redirect("review_list//")
 
+#메인페이지에서 주소를 클릭했을 때 보여질 뷰
 class SelectPage(ListView):
-    models = Cafe
-    template_name = "date/main_area.html"
+    models = Cafe   #모델은 cafe를 사용
+    template_name = "date/main_area.html"   #템플릿설정
 
     def get_queryset(self):
         cafe_list = Cafe.objects.all()
 
         return cafe_list
 
+    #가져올 데이터를 설정
     def get_context_data(self, **kwargs):
         context =super().get_context_data()
-
+        # 주소창으로 받아온 데이터
         q = self.kwargs["q"]
-
+        #주소를 설정하기 위한 데이터
         context["addr_names"] = Addr.objects.all()
 
+        # 추천코스중 카페를 구성하기 위한 데이터
+        # 카페 데이터중 설정된 주소에 맞는 데이터를 랜덤으로 가져옴
         cafe_max = Cafe.objects.filter(cafe_addr__contains=q).count()
 
         cafe_ran = random.randint(0,cafe_max-1)
@@ -94,6 +104,8 @@ class SelectPage(ListView):
         cafe_ran = random.randint(0,cafe_max-1)
         context["cafe_recommed_3"] = Cafe.objects.filter(cafe_addr__contains=q)[cafe_ran]
 
+        # 추천코스중 식당을 구성하기 위한 데이터
+        # 식당 데이터중 설정된 주소에 맞는 데이터를 랜덤으로 가져옴
         rest_max = Rest.objects.filter(rest_addr__contains=q).count()
         rest_ran = random.randint(0, rest_max-1)
         context["rest_recommed_1"] = Rest.objects.filter(rest_addr__contains = q)[rest_ran]
@@ -102,8 +114,9 @@ class SelectPage(ListView):
         rest_ran = random.randint(0, rest_max-1)
         context["rest_recommed_3"] = Rest.objects.filter(rest_addr__contains = q)[rest_ran]
 
+        # 추천코스중 관광지를 구성하기 위한 데이터
+        # 관광지 데이터중 설정된 주소에 맞는 데이터를 랜덤으로 가져옴
         place_max = Place.objects.filter(place_addr__contains=q).count()
-
         place_ran = random.randint(0, place_max-1)
         context["place_recommed_1"] = Place.objects.filter(place_addr__contains=q)[place_ran]
         place_ran = random.randint(0, place_max-1)
@@ -114,13 +127,15 @@ class SelectPage(ListView):
 
         return context
 
-
+#장소페이지에서 초기화면을 보여주기위한 뷰
 class PlaceList(ListView):
-    models = Cafe
-    template_name = "date/place.html"
+    models = Cafe   #모델은 cafe를 사용
+    template_name = "date/place.html"   #템플릿 설정
 
+    #가져올 데이터를 설정
     def get_context_data(self, **kwargs):
         context =super().get_context_data()
+        #주소 설정을 위한 데이터
         context["addr_names"] = Addr.objects.all()
 
         return context
@@ -139,112 +154,145 @@ class PlaceList(ListView):
     #
     #     return context
 
+#장소페이지에서 카페를 클릭했을 때 보여줄 페이지
 class PlaceCafe(ListView):
-    models = Cafe
-    template_name = "date/place.html"
+    models = Cafe   #모델은 cafe를 사용
+    template_name = "date/place.html"   #템플릿 설정
 
     def get_queryset(self):
         cafe_list = Cafe.objects.all()
 
         return cafe_list
 
+    #가져올 데이터를 설정
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
+        #주소를 설정하기 위한 데이터
         context["addr_names"] = Addr.objects.all()
+        #카페,식당,관광지를 구분하기 위한 데이터
         context["crp_check"] = 1
+        #카페,식당,관광지를 클릭했는지 구분하기 위한 데이터
         context["check"] = 1
 
         return context
 
+#장소페이지에서 식당을 클릭했을 때 보여줄 페이지
 class PlaceRest(ListView):
-    models = Rest
-    template_name = "date/place.html"
+    models = Rest   #모델은 rest를 사용
+    template_name = "date/place.html"   #템플릿을 설정
 
     def get_queryset(self):
         rest_list = Rest.objects.all()
 
         return rest_list
 
+    #가져올 데이터를 설정
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
+        # 주소를 설정하기 위한 데이터
         context["addr_names"] = Addr.objects.all()
+        # 카페,식당,관광지를 구분하기 위한 데이터
         context["crp_check"] = 1
+        # 카페,식당,관광지를 클릭했는지 구분하기 위한 데이터
         context["check"] = 2
         return context
 
+#장소페이지에서 식당을 클릭했을 때 보여줄 페이지
 class PlacePlace(ListView):
-    models = Place
-    template_name = "date/place.html"
+    models = Place  #모델은 place를 사용
+    template_name = "date/place.html"   #템플릿을 설정
 
     def get_queryset(self):
         place_list = Place.objects.all()
 
         return place_list
 
-
+    # 가져올 데이터를 설정
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
+        # 주소를 설정하기 위한 데이터
         context["addr_names"] = Addr.objects.all()
+        # 카페,식당,관광지를 구분하기 위한 데이터
         context["crp_check"] = 1
+        # 카페,식당,관광지를 클릭했는지 구분하기 위한 데이터
         context["check"] = 3
 
         return context
 
+#장소페이지에서 카페와 장소를 클릭했을 때 보여줄 뷰
 class PlaceCafeLoc(ListView):
-    models = Cafe
-    template_name = "date/place.html"
+    models = Cafe   #모델은 cafe를 사용
+    template_name = "date/place.html"   #템플릿을 설정
 
+    #가져올 데이터를 설정
     def get_queryset(self):
+        #주소창으로 받아온 데이터
         q = self.kwargs["q"]
-
+        #주소창으로 받아온 데이터로 리스트 조회
         cafe_list_loc = Cafe.objects.filter(cafe_addr__contains=q)
 
         return cafe_list_loc
 
+    #가져올 데이터를 설정
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
+        # 주소를 설정하기 위한 데이터
         context["addr_names"] = Addr.objects.all()
+        # 카페,식당,관광지를 구분하기 위한 데이터
         context["crp_check"] = 1
+        # 카페,식당,관광지를 클릭했는지 구분하기 위한 데이터
         context["check"] = 1
 
         return context
 
-
+#장소페이지에서 식당과 장소를 클릭했을 때 보여줄 뷰
 class PlaceRestLoc(ListView):
-    models = Rest
-    template_name = "date/place.html"
+    models = Rest   #모델은 rest를 사용
+    template_name = "date/place.html"   #템플릿을 설정
 
+    #가져올 데이터를 설정
     def get_queryset(self):
+        #주소창으로 받아온 데이터
         q = self.kwargs["q"]
-
+        # 주소창으로 받아온 데이터로 리스트 조회
         rest_list_loc = Rest.objects.filter(rest_addr__contains=q)
 
         return rest_list_loc
 
+    # 가져올 데이터를 설정
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
+        # 주소를 설정하기 위한 데이터
         context["addr_names"] = Addr.objects.all()
+        # 카페,식당,관광지를 구분하기 위한 데이터
         context["crp_check"] = 1
+        # 카페,식당,관광지를 클릭했는지 구분하기 위한 데이터
         context["check"] = 2
 
         return context
 
-
+#장소페이지에서 관광지와 장소를 클릭했을 때 보여줄 뷰
 class PlacePlaceLoc(ListView):
-    models = Place
-    template_name = "date/place.html"
+    models = Place  #모델은 place를 사용
+    template_name = "date/place.html"   #템플릿을 설정
 
+    # 가져올 데이터를 설정
     def get_queryset(self):
+        # 주소창으로 받아온 데이터
         q = self.kwargs["q"]
-
+        # 주소창으로 받아온 데이터로 리스트 조회
         place_list_loc = Place.objects.filter(place_addr__contains=q)
 
         return place_list_loc
 
+    # 가져올 데이터를 설정
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
+        # 주소를 설정하기 위한 데이터
         context["addr_names"] = Addr.objects.all()
+        # 카페,식당,관광지를 구분하기 위한 데이터
         context["crp_check"] = 1
+        # 카페,식당,관광지를 클릭했는지 구분하기 위한 데이터
         context["check"] = 3
         return context
 
