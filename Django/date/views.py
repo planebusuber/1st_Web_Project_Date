@@ -50,30 +50,12 @@ class MainPage(ListView):
 
         return context
 
-
+# 리뷰의 리스트들을 보여주는 뷰
 class ReviewList(ListView):
-    model = Review
-    paginate_by = 5
+    model = Review # 모델을 Review로 설정
+    paginate_by = 5 # 한 페이지에 5개 까지 보여지게 함
     ordering = ['-created_at'] # 게시글 최신순 정렬
-    template_name = "date/review_list.html"
-
-def form_valid(self, form):
-    current_user = self.request.user
-    if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):  #현재 유저가 로그인이 된 상태인지 체크하는 if문
-        form.instance.author = current_user
-
-        # 태그와 관련된 작업을 하기 전에 form_valid()의 결괏값을 response에 저장
-        response = super().form_valid(form)
-
-        # POST 방식으로 전달된 정보 중 name="tags_str"인 데이터를 가져오기
-        tags_str = self.request.POST.get("tags_str")
-
-        # 작업이 끝나면 response 변수에 담아두었던
-        # CreateView의 form_valid() 결괏값을 return
-        return response
-
-    else:
-        return redirect("review_list//")
+    template_name = "date/review_list.html" # 템플릿 지정
 
 #메인페이지에서 주소를 클릭했을 때 보여질 뷰
 class SelectPage(ListView):
@@ -144,15 +126,6 @@ class PlaceList(ListView):
 
         return cafe_list
 
-
-    # def get_context_data(self,*kwargs):
-    #     context = super().get_context_data()
-    #
-    #     context["cafe_list"] = Cafe.objects.all()
-    #     context["rest_list"] = Rest.objects.all()
-    #     context["place_list"] = Place.objects.all()
-    #
-    #     return context
 
 #장소페이지에서 카페를 클릭했을 때 보여줄 페이지
 class PlaceCafe(ListView):
