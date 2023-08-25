@@ -3,37 +3,35 @@
 {% block main_area %}
     <div class="container">
         <div class="card">
-        <div class="card-header text-white lh-base" style="background-color: #FC4C64;">
-            <h3>추천코스</h3>
-        </div>
+            <div class="card-header text-white lh-base" style="background-color: #FC4C64;">
+                <h3>추천코스</h3>
+            </div>
         <div class="card-body">
             <div class="d-flex justify-content-center">
                 <img class="" src="/static/date/imgs/cafe_img/{{cafe_detail_list.cafe_img}}.jpg" alt="{{cafe_detail_list.cafe_img}}"width="300">
             </div>
-            <h5>이름</h5> <p>{{cafe_detail_list.cafe_name}}</p>
-            <h5>주소</h5> <p>{{cafe_detail_list.cafe_addr}}</p>
-            <h5>대표메뉴</h5> <p>{{cafe_detail_list.cafe_time}}</p>
-            <h5>영업시간</h5> <p>{{cafe_detail_list.cafe_time}}</p>
-            <h5>상세설명</h5> <p>{{cafe_detail_list.cafe_detail}}</p>
+                <h5>이름</h5> <p>{{cafe_detail_list.cafe_name}}</p>
+                <h5>주소</h5> <p>{{cafe_detail_list.cafe_addr}}</p>
+                <h5>대표메뉴</h5> <p>{{cafe_detail_list.cafe_menu}}</p>
+                <h5>영업시간</h5> <p>{{cafe_detail_list.cafe_time}}</p>
+                <h5>상세설명</h5> <p>{{cafe_detail_list.cafe_detail}}</p>
             <hr/>
-
             <div class="d-flex justify-content-center">
                 <img class="" src="/static/date/imgs/rest_img/{{rest_detail_list.rest_img}}.jpg" alt="{{rest_detail_list.rest_img}}"width="300">
             </div>
-            <h5>이름</h5> <p>{{rest_detail_list.rest_name}}</p>
-            <h5>주소</h5> <p>{{rest_detail_list.rest_addr}}</p>
-            <h5>대표메뉴</h5> <p>{{rset_detail_list.rest_time}}</p>
-            <h5>영업시간</h5> <p>{{rest_detail_list.rest_time}}</p>
-            <h5>상세설명</h5> <p>{{rest_detail_list.rest_detail}}</p>
-            <hr/>
-
+                <h5>이름</h5> <p>{{rest_detail_list.rest_name}}</p>
+                <h5>주소</h5> <p>{{rest_detail_list.rest_addr}}</p>
+                <h5>대표메뉴</h5> <p>{{rest_detail_list.rest_menu}}</p>
+                <h5>영업시간</h5> <p>{{rest_detail_list.rest_time}}</p>
+                <h5>상세설명</h5> <p>{{rest_detail_list.rest_detail}}</p>
+                <hr/>
             <div class="d-flex justify-content-center">
                 <img class="" src="/static/date/imgs/place_img/{{place_detail_list.place_img}}.jpg" alt="{{place_detail_list.place_img}}"width="300">
             </div>
-            <h5>이름</h5> <p>{{place_detail_list.place_name}}</p>
-            <h5>주소</h5> <p>{{place_detail_list.place_addr}}</p>
-            <h5>영업시간</h5> <p>{{place_detail_list.place_time}}</p>
-            <h5>상세설명</h5> <p>{{place_detail_list.place_detail}}</p>
+                <h5>이름</h5> <p>{{place_detail_list.place_name}}</p>
+                <h5>주소</h5> <p>{{place_detail_list.place_addr}}</p>
+                <h5>영업시간</h5> <p>{{place_detail_list.place_time}}</p>
+                <h5>상세설명</h5> <p>{{place_detail_list.place_detail}}</p>
         </div>
             <div class="container">
                 {% if user.is_authenticated %}
@@ -42,6 +40,7 @@
                            role="button"> 리뷰 작성하기→ </a>
                 {% endif %}
             </div>
+        </div>
         <br/>
     </div>
 

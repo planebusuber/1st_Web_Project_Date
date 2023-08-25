@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>{% block head_title %}오늘, 여기 어때?{% endblock %}</title>
+    <title>{% block head_title %}오늘, 여기 어때?{% endblock %}</title> <!-- head title 블록 지정 -->
     <!-- bootstrap -->
     <link href="{% static 'date/bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
     <!-- fontawesome -->
@@ -16,24 +16,20 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-{% include "date/navbar.html" %}
-
+{% include "date/navbar.html" %}<!-- navbar를 불러옴 -->
 
   <div class="container my-3">
         <div class="container" id = "main-area">
             {% block main_area %}
             {% endblock %}
-
         </div>
-
-
   </div>
 
-{% block content %}
+{% block content %} <!-- content 블록이 들어갈 자리 -->
 {% endblock %}
 
 
-{% block signup %}
+{% block signup %}<!-- sign up 블록이 들어갈 자리 -->
 {% endblock %}
 
 
